@@ -37,7 +37,6 @@ if has('gui_running')
 		set guifont=WenQuanYi\ Zen\ Hei\ Mono\ 14
 	endif
 else
-	set columns=80 lines=25
 	set statusline=[%t]%m%r%h%w%y
 	set statusline+=%=
 	set statusline+=[%{mode()}]
