@@ -1,11 +1,13 @@
+//Linux
+/etc/vim/vimrc /etc/vim/gvimrc //source /opt/vimrc/setting.vim
+
+//Windows
 $VIM/_vimrc
 /*
 " source $VIMRUNTIME/vimrc_example.vim
 " source $VIMRUNTIME/mswin.vim
 source $VIM/setting.vim
 */
-
-/etc/vim/vimrc /etc/vim/gvimrc //source /opt/setting.vim
 
 //setting.vim
 /*
