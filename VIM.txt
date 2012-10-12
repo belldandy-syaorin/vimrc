@@ -1,5 +1,5 @@
 //Linux
-/etc/vim/vimrc /etc/vim/gvimrc //source /opt/vimrc/setting.vim
+/etc/vim/vimrc /etc/vim/gvimrc ~/.vimrc //source /opt/vimrc/setting.vim
 
 //Windows
 $VIM/_vimrc
