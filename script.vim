@@ -6,3 +6,6 @@ if has('python')
 	let g:gundo_preview_bottom = 1
 	let g:gundo_close_on_revert = 1
 endif
+
+nnoremap <F6> :NERDTreeToggle<CR>
+let NERDTreeWinSize = 20
