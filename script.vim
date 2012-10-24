@@ -9,7 +9,5 @@ nnoremap <F6> :NERDTreeToggle<CR>
 let NERDTreeCaseSensitiveSort = 1
 let NERDTreeChDirMode = 2
 let NERDTreeMinimalUI = 1
-let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
-let NERDTreeShowLineNumbers = 1
 let NERDTreeWinSize = 20
