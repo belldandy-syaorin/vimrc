@@ -1,9 +1,7 @@
 set nocompatible
 if has('win32') || has('win64')
-	language english
 	set fileformats=dos,unix
 elseif has('unix')
-	language en_US.UTF-8
 	set fileformats=unix,dos
 endif
 if v:version >= 703
@@ -32,9 +30,11 @@ if has('gui_running')
 	if has('win32') || has('win64')
 		autocmd InsertEnter * set noimdisable
 		autocmd InsertLeave * set imdisable
-		set guifont=MingLiU:h14
+		set guifont=Source_Code_Pro_Light:h14
+		set guifontwide=MingLiU:h17
 	elseif has('unix')
-		set guifont=WenQuanYi\ Zen\ Hei\ Mono\ 14
+		set guifont=Source\ Code\ Pro\ Light\ 14
+		set guifontwide=WenQuanYi\ Zen\ Hei\ Mono\ 17
 	endif
 else
 	set statusline=[%t]%m%r%h%w%y
