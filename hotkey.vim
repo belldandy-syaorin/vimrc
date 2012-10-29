@@ -1,4 +1,6 @@
-nnoremap <F5> :GundoToggle<CR>
+if v:version >= 703 && has('python')
+	nnoremap <F5> :GundoToggle<CR>
+endif
 nnoremap <S-F5> :FufCoverageFile!<CR>
 
 nnoremap <F6> :NERDTreeToggle<CR>
