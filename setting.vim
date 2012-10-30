@@ -1,12 +1,18 @@
 set nocompatible
+if filereadable(expand('$VIMRUNTIME/autoload/pathogen.vim')) ||
+ \ filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim'))
+	call pathogen#infect()
+endif
 if has('win32') || has('win64')
 	set fileformats=dos,unix
 elseif has('unix')
 	set fileformats=unix,dos
 endif
 if v:version >= 703
-	autocmd InsertEnter * set nocursorcolumn nocursorline relativenumber colorcolumn=
-	autocmd InsertLeave * set cursorcolumn cursorline number colorcolumn=40,80
+	autocmd InsertEnter *
+	\ set nocursorcolumn nocursorline relativenumber colorcolumn=
+	autocmd InsertLeave *
+	\ set cursorcolumn cursorline number colorcolumn=40,80
 	set colorcolumn=40,80
 else
 	autocmd InsertEnter * set nocursorcolumn nocursorline
