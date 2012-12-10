@@ -1,17 +1,15 @@
 //Linux
 /etc/vim/vimrc ~/.vimrc
-/*
-source /opt/vimrc/setting.vim
-source /opt/vimrc/hotkey.vim
-source /opt/vimrc/script.vim
-*/
+	/*
+	source /opt/vimrc/setting.vim
+	source /opt/vimrc/script.vim
+	*/
 
 //Windows
 $VIM/_vimrc $VIM/vimrc
-/*
-" source $VIMRUNTIME/vimrc_example.vim
-" source $VIMRUNTIME/mswin.vim
-source $VIM/setting.vim
-source $VIM/hotkey.vim
-source $VIM/script.vim
-*/
+	/*
+	source $VIM/setting.vim
+	source $VIM/script.vim
+	*/
+	source $VIMRUNTIME/vimrc_example.vim //Comment
+	source $VIMRUNTIME/mswin.vim //Comment
