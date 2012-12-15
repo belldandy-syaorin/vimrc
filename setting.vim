@@ -27,16 +27,16 @@ if has('gui_running')
 	set guioptions-=e
 	set guioptions-=m
 	set guioptions-=T
-	set statusline=[%3*%t%*]%1*%m%r%h%w%y%*
+	set statusline=[%2*%t%*]%3*%m%r%h%w%y%*
 	set statusline+=%=
-	set statusline+=[%3*%{mode()}%*]
+	set statusline+=[%1*%{mode()}%*]
 	if v:version >= 703
-		set statusline+=[%2*%{get(undotree(),'seq_cur')}%*/
-		                \%2*%{get(undotree(),'seq_last')}%*]
+		set statusline+=[%1*%{get(undotree(),'seq_cur')}%*/
+		                \%1*%{get(undotree(),'seq_last')}%*]
 	endif
 	set statusline+=[%1*%{&encoding}%*]
 	set statusline+=[%1*%{&fileencoding}%*(%1*%{&bomb}%*),%1*%{&fileformat}%*]
-	set statusline+=[%2*%l%*,%2*%c%*(%3*%p%*%%/%3*%L%*)]
+	set statusline+=[%1*%l%*,%1*%c%*(%1*%p%*%%/%1*%L%*)]
 	if has('win32') || has('win64')
 		autocmd InsertEnter * set noimdisable
 		autocmd InsertLeave * set imdisable
