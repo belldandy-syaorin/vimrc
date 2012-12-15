@@ -30,8 +30,10 @@ if has('gui_running')
 	set statusline=[%3*%t%*]%1*%m%r%h%w%y%*
 	set statusline+=%=
 	set statusline+=[%3*%{mode()}%*]
-	set statusline+=[%2*%{get(undotree(),'seq_cur')}%*/
-	                \%2*%{get(undotree(),'seq_last')}%*]
+	if v:version >= 703
+		set statusline+=[%2*%{get(undotree(),'seq_cur')}%*/
+		                \%2*%{get(undotree(),'seq_last')}%*]
+	endif
 	set statusline+=[%1*%{&encoding}%*]
 	set statusline+=[%1*%{&fileencoding}%*(%1*%{&bomb}%*),%1*%{&fileformat}%*]
 	set statusline+=[%2*%l%*,%2*%c%*(%3*%p%*%%/%3*%L%*)]
@@ -48,8 +50,10 @@ else
 	set statusline=[%t]%m%r%h%w%y
 	set statusline+=%=
 	set statusline+=[%{mode()}]
-	set statusline+=[%{get(undotree(),'seq_cur')}/
-	                \%{get(undotree(),'seq_last')}]
+	if v:version >= 703
+		set statusline+=[%{get(undotree(),'seq_cur')}/
+		                \%{get(undotree(),'seq_last')}]
+	endif
 	set statusline+=[%{&encoding}]
 	set statusline+=[%{&fileencoding}(%{&bomb}),%{&fileformat}]
 	set statusline+=[%l,%c(%p%%/%L)]
