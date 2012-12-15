@@ -29,9 +29,11 @@ if has('gui_running')
 	set guioptions-=T
 	set statusline=[%3*%t%*]%1*%m%r%h%w%y%*
 	set statusline+=%=
-	set statusline+=[%2*%{mode()}%*]
-	set statusline+=[%1*%{&enc}%*]
-	set statusline+=[%1*%{&fenc}%*(%1*%{&bomb}%*),%1*%{&ff}%*]
+	set statusline+=[%3*%{mode()}%*]
+	set statusline+=[%2*%{get(undotree(),'seq_cur')}%*/
+	                \%2*%{get(undotree(),'seq_last')}%*]
+	set statusline+=[%1*%{&encoding}%*]
+	set statusline+=[%1*%{&fileencoding}%*(%1*%{&bomb}%*),%1*%{&fileformat}%*]
 	set statusline+=[%2*%l%*,%2*%c%*(%3*%p%*%%/%3*%L%*)]
 	if has('win32') || has('win64')
 		autocmd InsertEnter * set noimdisable
@@ -46,8 +48,10 @@ else
 	set statusline=[%t]%m%r%h%w%y
 	set statusline+=%=
 	set statusline+=[%{mode()}]
-	set statusline+=[%{&enc}]
-	set statusline+=[%{&fenc}(%{&bomb}),%{&ff}]
+	set statusline+=[%{get(undotree(),'seq_cur')}/
+	                \%{get(undotree(),'seq_last')}]
+	set statusline+=[%{&encoding}]
+	set statusline+=[%{&fileencoding}(%{&bomb}),%{&fileformat}]
 	set statusline+=[%l,%c(%p%%/%L)]
 endif
 set autoindent
