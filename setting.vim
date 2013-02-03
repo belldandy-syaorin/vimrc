@@ -58,6 +58,7 @@ else
 	set statusline+=[%{&fileencoding}(%{&bomb}),%{&fileformat}]
 	set statusline+=[%l,%c(%p%%/%L)]
 endif
+set ambiwidth=double
 set autoindent
 set autoread
 set backspace=indent,eol,start
