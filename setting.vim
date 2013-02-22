@@ -1,10 +1,11 @@
 set nocompatible
-if filereadable(expand('$VIMRUNTIME/autoload/pathogen.vim')) ||
- \ filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim'))
+if filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim')) ||
+ \ filereadable(expand('$VIMRUNTIME/autoload/pathogen.vim'))
 	call pathogen#infect()
 endif
 if has('win32') || has('win64')
 	set fileformats=dos,unix
+	set shellcmdflag=/u/c
 elseif has('unix')
 	set fileformats=unix,dos
 endif
@@ -67,7 +68,7 @@ set cursorcolumn
 set cursorline
 set encoding=utf-8
 set fileencoding=utf-8
-set fileencodings=utf-8,ucs-bom,taiwan,prc,japan,korea
+set fileencodings=utf-8,ucs-bom,ucs-2le,taiwan,prc,japan,korea
 set foldmethod=indent
 set hlsearch
 set ignorecase
