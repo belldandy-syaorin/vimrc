@@ -1,3 +1,4 @@
+if (&loadplugins == 1)
 "gundo.vim
 	if v:version >= 703 && has('python')
 		nnoremap <F4> :GundoToggle<CR>
@@ -15,3 +16,4 @@
 	nnoremap <F5> :FufFile!<CR>
 	nnoremap <F6> :FufDir!<CR>
 	nnoremap <F7> :FufCoverageFile!<CR>
+endif
