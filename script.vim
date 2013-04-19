@@ -7,7 +7,7 @@ if (&loadplugins == 1)
 		let g:gundo_preview_height = 10
 		let g:gundo_right = 1
 		let g:gundo_width = 20
-	endif 
+	endif
 
 "neocomplcache
 	let g:neocomplcache_enable_at_startup = 1
