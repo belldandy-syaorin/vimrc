@@ -1,0 +1,16 @@
+from win32api import GetSystemMetrics
+import win32gui
+import vim
+
+resolution_w = GetSystemMetrics(0)
+resolution_h = GetSystemMetrics(1)
+hwnd = win32gui.GetActiveWindow()
+gvimrect = win32gui.GetWindowRect(hwnd)
+gvimrect_x = gvimrect[0]
+gvimrect_y = gvimrect[1]
+gvimrect_w = gvimrect[2] - gvimrect_x
+gvimrect_h = gvimrect[3] - gvimrect_y
+center_x = (resolution_w - gvimrect_w) / 2
+center_y = (resolution_h - gvimrect_h) / 2
+vim.command("let g:gvimwinpos_x="+str(center_x))
+vim.command("let g:gvimwinpos_y="+str(center_y))

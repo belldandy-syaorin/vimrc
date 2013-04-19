@@ -10,6 +10,7 @@ $VIM/_vimrc $VIM/vimrc
 	/*
 	source $VIM/setting.vim
 	source $VIM/script.vim
+	source $VIM/gvimwinpos.vim
 	*/
 	source $VIMRUNTIME/vimrc_example.vim //Comment
 	source $VIMRUNTIME/mswin.vim //Comment
