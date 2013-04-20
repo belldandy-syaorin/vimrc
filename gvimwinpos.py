@@ -20,10 +20,13 @@ if gvimrect_x != center_x and gvimrect_y != center_y:
         vim.command("let g:gvimwinpos_mode='center'")
 if gvimrect_x == center_x and gvimrect_y == center_y:
         vim.command("let g:gvimwinpos_x="+str(center_left_x))
+        vim.command("let g:gvimwinpos_y="+str(center_y))
         vim.command("let g:gvimwinpos_mode='center(left)'")
 if gvimrect_x == center_left_x and gvimrect_y == center_y:
         vim.command("let g:gvimwinpos_x="+str(center_right_x))
+        vim.command("let g:gvimwinpos_y="+str(center_y))
         vim.command("let g:gvimwinpos_mode='center(right)'")
 if gvimrect_x == center_right_x and gvimrect_y == center_y:
         vim.command("let g:gvimwinpos_x="+str(center_x))
+        vim.command("let g:gvimwinpos_y="+str(center_y))
         vim.command("let g:gvimwinpos_mode='center'")
