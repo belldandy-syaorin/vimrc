@@ -1,4 +1,15 @@
 if has('python')
-	nnoremap <F2> :python import sys<CR>:python sys.argv = ["smart"]<CR>:execute 'pyfile ' . '$VIM/gvimwinpos.py'<CR>:execute 'winpos ' . g:gvimwinpos_x g:gvimwinpos_y<CR>:echo "gvimwinpos_mode =" gvimwinpos_mode<CR>
-	nnoremap <F3> :python import sys<CR>:python sys.argv = ["normal"]<CR>:execute 'pyfile ' . '$VIM/gvimwinpos.py'<CR>:execute 'winpos ' . g:gvimwinpos_x g:gvimwinpos_y<CR>:echo "gvimwinpos_mode =" gvimwinpos_mode<CR>
+	python import sys
+	function! GvimWinPos(mode)
+		if a:mode == 1
+			python sys.argv = ["smart"]
+		elseif a:mode == 0
+			python sys.argv = ["normal"]
+		endif
+		execute 'pyfile ' . '$VIM/gvimwinpos.py'
+		execute 'winpos ' . g:gvimwinpos_x g:gvimwinpos_y
+		echo "gvimwinpos_mode =" g:gvimwinpos_mode
+	endfunction
+	nnoremap <F2> :call GvimWinPos(1)<CR>
+	nnoremap <F3> :call GvimWinPos(0)<CR>
 endif
