@@ -11,7 +11,7 @@ gvimrect_x = gvimrect[0]
 gvimrect_y = gvimrect[1]
 gvimrect_w = gvimrect[2] - gvimrect_x
 gvimrect_h = gvimrect[3] - gvimrect_y
-center = [(resolution_w - gvimrect_w) / 2, 0, resolution_w - gvimrect_w]
+center_x = [(resolution_w - gvimrect_w) / 2, 0, resolution_w - gvimrect_w]
 center_y = (resolution_h - gvimrect_h) / 2
 smart_x = [resolution_w / 3, resolution_w / 3 * 2, resolution_w]
 smart_y = [resolution_h / 3, resolution_h / 3 * 2, resolution_h]
@@ -34,14 +34,14 @@ def vim_size(x,y):
     vim.command("let g:vim_size_y="+str(y))
 
 def mode_normal():
-    if gvimrect_x != center[0] and gvimrect_y != center_y:
-        vim_pos(center[0],center_y,5)
-    elif gvimrect_x == center[0] and gvimrect_y == center_y:
-        vim_pos(center[1],center_y,4)
-    elif gvimrect_x == center[1] and gvimrect_y == center_y:
-        vim_pos(center[2],center_y,6)
-    elif gvimrect_x == center[2] and gvimrect_y == center_y:
-        vim_pos(center[0],center_y,5)
+    if gvimrect_x != center_x[0] and gvimrect_y != center_y:
+        vim_pos(center_x[0],center_y,5)
+    elif gvimrect_x == center_x[0] and gvimrect_y == center_y:
+        vim_pos(center_x[1],center_y,4)
+    elif gvimrect_x == center_x[1] and gvimrect_y == center_y:
+        vim_pos(center_x[2],center_y,6)
+    elif gvimrect_x == center_x[2] and gvimrect_y == center_y:
+        vim_pos(center_x[0],center_y,5)
 
 def mode_smart():
    if wincenter[0] >= 0 and wincenter[0] <= smart_x[0]:
