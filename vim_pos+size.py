@@ -6,18 +6,18 @@ import vim
 resolution_w = GetSystemMetrics(0)
 resolution_h = GetSystemMetrics(1)
 hwnd = win32gui.GetActiveWindow()
-gvimrect = win32gui.GetWindowRect(hwnd)
-gvimrect_x = gvimrect[0]
-gvimrect_y = gvimrect[1]
-gvimrect_w = gvimrect[2] - gvimrect_x
-gvimrect_h = gvimrect[3] - gvimrect_y
-center_x = [(resolution_w - gvimrect_w) / 2, 0, resolution_w - gvimrect_w]
-center_y = (resolution_h - gvimrect_h) / 2
+vim_rect = win32gui.GetWindowRect(hwnd)
+vim_rect_x = vim_rect[0]
+vim_rect_y = vim_rect[1]
+vim_rect_w = vim_rect[2] - vim_rect_x
+vim_rect_h = vim_rect[3] - vim_rect_y
+center_x = [(resolution_w - vim_rect_w) / 2, 0, resolution_w - vim_rect_w]
+center_y = (resolution_h - vim_rect_h) / 2
 smart_x = [resolution_w / 3, resolution_w / 3 * 2, resolution_w]
 smart_y = [resolution_h / 3, resolution_h / 3 * 2, resolution_h]
-wincenter = [gvimrect_x + (gvimrect_w / 2), gvimrect_y + (gvimrect_h / 2)]
-resmart_x = [(resolution_w - gvimrect_w) / 2,resolution_w - gvimrect_w]
-resmart_y = [(resolution_h - gvimrect_h) / 2,resolution_h - gvimrect_h]
+wincenter = [vim_rect_x + (vim_rect_w / 2), vim_rect_y + (vim_rect_h / 2)]
+resmart_x = [(resolution_w - vim_rect_w) / 2,resolution_w - vim_rect_w]
+resmart_y = [(resolution_h - vim_rect_h) / 2,resolution_h - vim_rect_h]
 big = [1024, 768]
 large = [1280, 960]
 
@@ -34,13 +34,13 @@ def vim_size(x,y):
     vim.command("let g:vim_size_y="+str(y))
 
 def mode_normal():
-    if gvimrect_x != center_x[0] and gvimrect_y != center_y:
+    if vim_rect_x != center_x[0] and vim_rect_y != center_y:
         vim_pos(center_x[0],center_y,5)
-    elif gvimrect_x == center_x[0] and gvimrect_y == center_y:
+    elif vim_rect_x == center_x[0] and vim_rect_y == center_y:
         vim_pos(center_x[1],center_y,4)
-    elif gvimrect_x == center_x[1] and gvimrect_y == center_y:
+    elif vim_rect_x == center_x[1] and vim_rect_y == center_y:
         vim_pos(center_x[2],center_y,6)
-    elif gvimrect_x == center_x[2] and gvimrect_y == center_y:
+    elif vim_rect_x == center_x[2] and vim_rect_y == center_y:
         vim_pos(center_x[0],center_y,5)
 
 def mode_smart():
