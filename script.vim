@@ -10,7 +10,11 @@ if (&loadplugins == 1)
 	endif
 
 "neocomplcache
-	let g:neocomplcache_enable_at_startup = 1
+	if filereadable(expand('$VIM/vimfiles/bundle/YouCompleteMe/plugin/youcompleteme.vim')) ||
+	 \ filereadable(expand('~/.vim/bundle/YouCompleteMe/plugin/youcompleteme.vim'))
+	else
+		let g:neocomplcache_enable_at_startup = 1
+	endif
 
 "vim-fuzzyfinder
 	nnoremap <F5> :FufFile!<CR>
