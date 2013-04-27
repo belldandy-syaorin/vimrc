@@ -32,6 +32,6 @@ if has('python')
 	nnoremap <F2> :call Vim_Size(0)<CR>
 	nnoremap <S-F2> :call Vim_Size(1)<CR>
 	nnoremap <C-F2> :set columns=80<CR>:set lines=25<CR>:winpos 0 0<CR>:echo "vim_size_mode = default"<CR>
-	nnoremap <S-F4> :call Vim_Top(0)<CR>:echo "Vim_Top = On"<CR>
-	nnoremap <C-F4> :call Vim_Top(1)<CR>:echo "Vim_Top = Off"<CR>
+	nnoremap <S-F4> :call Vim_Top(0)<CR>:echo "vim_top_mode = Enable"<CR>
+	nnoremap <C-F4> :call Vim_Top(1)<CR>:echo "vim_top_mode = Disable"<CR>
 endif
