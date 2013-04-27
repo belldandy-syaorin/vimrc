@@ -33,6 +33,9 @@ def vim_size(x,y):
     vim.command("let g:vim_size_x="+str(x))
     vim.command("let g:vim_size_y="+str(y))
 
+def vim_top(z):
+    win32gui.SetWindowPos(hwnd, z, 0, 0, 0, 0, 0x0001 + 0x0002)
+
 def mode_normal():
     if vim_rect_x != center_x[0] and vim_rect_y != center_y:
         vim_pos(center_x[0],center_y,5)
@@ -72,9 +75,17 @@ def mode_big():
 def mode_large():
     vim_size(large[0],large[1])
 
+def mode_top():
+    vim_top(-1)
+
+def mode_untop():
+    vim_top(-2)
+
 selectmode = {'normal': mode_normal,
               'smart': mode_smart,
               'big': mode_big,
               'large': mode_large,
+              'top': mode_top,
+              'untop': mode_untop,
 }
 selectmode[sys.argv[0]]()
