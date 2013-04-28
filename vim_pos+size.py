@@ -22,8 +22,7 @@ big = [1024, 768]
 large = [1280, 960]
 
 def vim_pos(x,y,z):
-    vim.command("let g:vim_pos_x="+str(x))
-    vim.command("let g:vim_pos_y="+str(y))
+    win32gui.SetWindowPos(hwnd, 0, x, y, 0, 0, 0x0001 + 0x0004)
     vim.command("let g:vim_pos_mode="+str(z))
 
 def vim_size(x,y):

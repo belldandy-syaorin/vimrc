@@ -7,7 +7,6 @@ if has('python')
 			python sys.argv = ["smart"]
 		endif
 		execute 'pyfile ' . '$VIM/vim_pos+size.py'
-		execute 'winpos ' . g:vim_pos_x g:vim_pos_y
 		echo "vim_pos_mode =" g:vim_pos_mode
 	endfunction
 	function! Vim_Size(mode)
