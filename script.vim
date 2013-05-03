@@ -10,8 +10,8 @@ if (&loadplugins == 1)
 	endif
 
 "neocomplcache
-	if filereadable(expand('$VIM/vimfiles/bundle/YouCompleteMe/plugin/youcompleteme.vim')) ||
-	 \ filereadable(expand('~/.vim/bundle/YouCompleteMe/plugin/youcompleteme.vim'))
+	if filereadable(expand('$VIM/vimfiles/bundle/YouCompleteMe/python/ycm_core.pyd')) ||
+	 \ filereadable(expand('~/.vim/bundle/YouCompleteMe/python/ycm_core.so'))
 	else
 		let g:neocomplcache_enable_at_startup = 1
 	endif
