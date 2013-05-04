@@ -23,23 +23,20 @@ large = [1280, 960]
 
 def vim_pos(x,y,z):
     win32gui.SetWindowPos(hwnd, 0, x, y, 0, 0, 0x0001 + 0x0004)
-    vim.command("let g:vim_pos_mode="+str(z))
-    vim.command("echo 'vim_pos_mode =' g:vim_pos_mode")
+    vim.command("echo 'Vim_Pos ='"+str(z))
 
 def vim_size(x,y):
     a = (resolution_w - x) / 2
     b = (resolution_h - y) / 2
     win32gui.SetWindowPos(hwnd, 0, a, b, x, y, 0x0004)
-    vim.command("let g:vim_size_x="+str(x))
-    vim.command("let g:vim_size_y="+str(y))
-    vim.command("echo 'vim_size_mode =' g:vim_size_x g:vim_size_y")
+    vim.command("echo 'Vim_Size ='"+str(x)+" "+str(y))
 
 def vim_top(z):
     win32gui.SetWindowPos(hwnd, z, 0, 0, 0, 0, 0x0001 + 0x0002)
     if z == -1:
-        vim.command("echo 'vim_top_mode = Enable'")
+        vim.command("echo 'Vim_Top = Enable'")
     elif z == -2:
-        vim.command("echo 'vim_top_mode = Disable'")
+        vim.command("echo 'Vim_Top = Disable'")
 
 def mode_normal():
     if vim_rect_x != center_x[0] and vim_rect_y != center_y:
@@ -84,7 +81,7 @@ def mode_default():
     vim.command("set columns=80")
     vim.command("set lines=25")
     vim.command("winpos 0 0")
-    vim.command("echo 'vim_size_mode = default'")
+    vim.command("echo 'Vim_Pos+Size = Default'")
 
 def mode_top():
     vim_top(-1)

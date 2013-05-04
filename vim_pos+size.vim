@@ -30,7 +30,7 @@ if has('python')
 	nnoremap <S-F3> :call Vim_Pos(1)<CR>
 	nnoremap <F2> :call Vim_Size(0)<CR>
 	nnoremap <S-F2> :call Vim_Size(1)<CR>
-	nnoremap <C-F2> :call Vim_Size(2)<CR>
-	nnoremap <S-F4> :call Vim_Top(0)<CR>
-	nnoremap <C-F4> :call Vim_Top(1)<CR>
+	nnoremap <S-F4> :call Vim_Size(2)<CR>
+	nnoremap <S-F5> :call Vim_Top(0)<CR>
+	nnoremap <S-F6> :call Vim_Top(1)<CR>
 endif
