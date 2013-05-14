@@ -11,13 +11,11 @@ vim_rect_x = vim_rect[0]
 vim_rect_y = vim_rect[1]
 vim_rect_w = vim_rect[2] - vim_rect_x
 vim_rect_h = vim_rect[3] - vim_rect_y
-center_x = [(resolution_w - vim_rect_w) / 2, 0, resolution_w - vim_rect_w]
+center_x = (resolution_w - vim_rect_w) / 2
 center_y = (resolution_h - vim_rect_h) / 2
-smart_x = [resolution_w / 3, resolution_w / 3 * 2, resolution_w]
-smart_y = [resolution_h / 3, resolution_h / 3 * 2, resolution_h]
+smart_x = [resolution_w / 3, resolution_w / 3 * 2, resolution_w, resolution_w - vim_rect_w]
+smart_y = [resolution_h / 3, resolution_h / 3 * 2, resolution_h, resolution_h - vim_rect_h]
 wincenter = [vim_rect_x + (vim_rect_w / 2), vim_rect_y + (vim_rect_h / 2)]
-resmart_x = [(resolution_w - vim_rect_w) / 2,resolution_w - vim_rect_w]
-resmart_y = [(resolution_h - vim_rect_h) / 2,resolution_h - vim_rect_h]
 big = [1024, 768]
 large = [1280, 960]
 
@@ -38,38 +36,58 @@ def vim_top(z):
     elif z == -2:
         vim.command("echo 'Vim_Top = Disable'")
 
+class vim_move:
+    def posnum1(self):
+        vim_pos(0,smart_y[3],1)
+    def posnum4(self):
+        vim_pos(0,center_y,4)
+    def posnum7(self):
+        vim_pos(0,0,7)
+    def posnum2(self):
+        vim_pos(center_x,smart_y[3],2)
+    def posnum5(self):
+        vim_pos(center_x,center_y,5)
+    def posnum8(self):
+        vim_pos(center_x,0,8)
+    def posnum3(self):
+        vim_pos(smart_x[3],smart_y[3],3)
+    def posnum6(self):
+        vim_pos(smart_x[3],center_y,6)
+    def posnum9(self):
+        vim_pos(smart_x[3],0,9)
+
 def mode_normal():
-    if vim_rect_x != center_x[0] and vim_rect_y != center_y:
-        vim_pos(center_x[0],center_y,5)
-    elif vim_rect_x == center_x[0] and vim_rect_y == center_y:
-        vim_pos(center_x[1],center_y,4)
-    elif vim_rect_x == center_x[1] and vim_rect_y == center_y:
-        vim_pos(center_x[2],center_y,6)
-    elif vim_rect_x == center_x[2] and vim_rect_y == center_y:
-        vim_pos(center_x[0],center_y,5)
+    if vim_rect_x != center_x and vim_rect_y != center_y:
+        vm.posnum5()
+    elif vim_rect_x == center_x and vim_rect_y == center_y:
+        vm.posnum4()
+    elif vim_rect_x == 0 and vim_rect_y == center_y:
+        vm.posnum6()
+    elif vim_rect_x == smart_x[3] and vim_rect_y == center_y:
+        vm.posnum5()
 
 def mode_smart():
-   if wincenter[0] >= 0 and wincenter[0] <= smart_x[0]:
-       if wincenter[1] <= smart_y[0]:
-           vim_pos(0,0,7)
-       elif wincenter[1] >= smart_y[0] and wincenter[1] <= smart_y[1]:
-           vim_pos(0,resmart_y[0],4)
-       elif wincenter[1] >= smart_y[1] and wincenter[1] <= smart_y[2]:
-           vim_pos(0,resmart_y[1],1)
-   elif wincenter[0] >= smart_x[0] and wincenter[0] <= smart_x[1]:
-       if wincenter[1] <= smart_y[0]:
-           vim_pos(resmart_x[0],0,8)
-       elif wincenter[1] >= smart_y[0] and wincenter[1] <= smart_y[1]:
-           vim_pos(resmart_x[0],resmart_y[0],5)
-       elif wincenter[1] >= smart_y[1] and wincenter[1] <= smart_y[2]:
-           vim_pos(resmart_x[0],resmart_y[1],2)
-   elif wincenter[0] >= smart_x[1] and wincenter[0] <= smart_x[2]:
-       if wincenter[1] <= smart_y[0]:
-           vim_pos(resmart_x[1],0,9)
-       elif wincenter[1] >= smart_y[0] and wincenter[1] <= smart_y[1]:
-           vim_pos(resmart_x[1],resmart_y[0],6)
-       elif wincenter[1] >= smart_y[1] and wincenter[1] <= smart_y[2]:
-           vim_pos(resmart_x[1],resmart_y[1],3)
+    if wincenter[0] >= 0 and wincenter[0] <= smart_x[0]:
+        if wincenter[1] <= smart_y[0]:
+            vm.posnum7()
+        elif wincenter[1] >= smart_y[0] and wincenter[1] <= smart_y[1]:
+            vm.posnum4()
+        elif wincenter[1] >= smart_y[1] and wincenter[1] <= smart_y[2]:
+            vm.posnum1()
+    elif wincenter[0] >= smart_x[0] and wincenter[0] <= smart_x[1]:
+        if wincenter[1] <= smart_y[0]:
+            vm.posnum8()
+        elif wincenter[1] >= smart_y[0] and wincenter[1] <= smart_y[1]:
+            vm.posnum5()
+        elif wincenter[1] >= smart_y[1] and wincenter[1] <= smart_y[2]:
+            vm.posnum2()
+    elif wincenter[0] >= smart_x[1] and wincenter[0] <= smart_x[2]:
+        if wincenter[1] <= smart_y[0]:
+            vm.posnum9()
+        elif wincenter[1] >= smart_y[0] and wincenter[1] <= smart_y[1]:
+            vm.posnum6()
+        elif wincenter[1] >= smart_y[1] and wincenter[1] <= smart_y[2]:
+            vm.posnum3()
 
 def mode_big():
     vim_size(big[0],big[1])
@@ -89,6 +107,7 @@ def mode_top():
 def mode_untop():
     vim_top(-2)
 
+vm = vim_move()
 selectmode = {'normal': mode_normal,
               'smart': mode_smart,
               'big': mode_big,
@@ -96,5 +115,14 @@ selectmode = {'normal': mode_normal,
               'default': mode_default,
               'top': mode_top,
               'untop': mode_untop,
+              'posnum1': vm.posnum1,
+              'posnum2': vm.posnum2,
+              'posnum3': vm.posnum3,
+              'posnum4': vm.posnum4,
+              'posnum5': vm.posnum5,
+              'posnum6': vm.posnum6,
+              'posnum7': vm.posnum7,
+              'posnum8': vm.posnum8,
+              'posnum9': vm.posnum9,
 }
 selectmode[sys.argv[0]]()
