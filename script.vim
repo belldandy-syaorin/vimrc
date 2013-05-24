@@ -16,16 +16,12 @@ if (&loadplugins == 1)
 	 \ filereadable(expand(
 	 \ '~/.vim/bundle/YouCompleteMe/python/ycm_core.so'))
 	else
-		if has('win32') || has('win64')
-			let g:clang_library_path =
-			  \ "C:/dev/llvm_build/bin/Release"
-		endif
-		let g:clang_complete_auto = 0
 		let g:neocomplcache_enable_at_startup = 1
 		if !exists('g:neocomplcache_force_omni_patterns')
 			let g:neocomplcache_force_omni_patterns = {}
 		endif
 		let g:neocomplcache_force_overwrite_completefunc = 1
+		let g:clang_complete_auto = 0
 		let g:neocomplcache_force_omni_patterns.c =
 		  \ '[^.[:digit:] *\t]\%(\.\|->\)'
 		let g:neocomplcache_force_omni_patterns.cpp =
@@ -34,6 +30,10 @@ if (&loadplugins == 1)
 		  \ '[^.[:digit:] *\t]\%(\.\|->\)'
 		let g:neocomplcache_force_omni_patterns.objcpp =
 		  \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+		if has('win32') || has('win64')
+			let g:clang_library_path =
+			  \ "C:/dev/llvm_build/bin/Release"
+		endif
 	endif
 
 "vim-fuzzyfinder
