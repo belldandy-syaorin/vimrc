@@ -9,17 +9,31 @@ if (&loadplugins == 1)
 		let g:gundo_width = 20
 	endif
 
-"YouCompleteMe > clang_complete > neocomplcache
-	if filereadable(expand('$VIM/vimfiles/bundle/YouCompleteMe/python/ycm_core.pyd')) ||
-	 \ filereadable(expand('~/.vim/bundle/YouCompleteMe/python/ycm_core.so'))
-	elseif filereadable(expand('$VIM/vimfiles/bundle/clang_complete/plugin/clang_complete.vim')) ||
-	     \ filereadable(expand('~/.vim/bundle/clang_complete/plugin/clang_complete.vim'))
+"YouCompleteMe > clang_complete + neocomplcache
+	if filereadable(expand(
+	 \ '$VIM/vimfiles/bundle/YouCompleteMe/python/ycm_core.pyd'))
+	 \ ||
+	 \ filereadable(expand(
+	 \ '~/.vim/bundle/YouCompleteMe/python/ycm_core.so'))
+	else
 		if has('win32') || has('win64')
-			let g:clang_library_path = "C:/dev/llvm_build/bin/Release"
+			let g:clang_library_path =
+			  \ "C:/dev/llvm_build/bin/Release"
 		endif
-	elseif filereadable(expand('$VIM/vimfiles/bundle/neocomplcache/plugin/neocomplcache.vim')) ||
-	     \ filereadable(expand('~/.vim/bundle/neocomplcache/plugin/neocomplcache.vim'))
+		let g:clang_complete_auto = 0
 		let g:neocomplcache_enable_at_startup = 1
+		if !exists('g:neocomplcache_force_omni_patterns')
+			let g:neocomplcache_force_omni_patterns = {}
+		endif
+		let g:neocomplcache_force_overwrite_completefunc = 1
+		let g:neocomplcache_force_omni_patterns.c =
+		  \ '[^.[:digit:] *\t]\%(\.\|->\)'
+		let g:neocomplcache_force_omni_patterns.cpp =
+		  \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+		let g:neocomplcache_force_omni_patterns.objc =
+		  \ '[^.[:digit:] *\t]\%(\.\|->\)'
+		let g:neocomplcache_force_omni_patterns.objcpp =
+		  \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 	endif
 
 "vim-fuzzyfinder
