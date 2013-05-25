@@ -22,6 +22,8 @@ if (&loadplugins == 1)
 			let g:ycm_global_ycm_extra_conf =
 			  \ '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 		endif
+		let g:ycm_autoclose_preview_window_after_completion = 1
+		let g:ycm_autoclose_preview_window_after_insertion = 1
 	else
 		let g:neocomplcache_enable_at_startup = 1
 		if !exists('g:neocomplcache_force_omni_patterns')
