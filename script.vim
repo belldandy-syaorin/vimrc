@@ -15,6 +15,13 @@ if (&loadplugins == 1)
 	 \ ||
 	 \ filereadable(expand(
 	 \ '~/.vim/bundle/YouCompleteMe/python/ycm_core.so'))
+		if has('win32') || has('win64')
+			let g:ycm_global_ycm_extra_conf =
+			  \ '$VIM/vimfiles/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+		elseif has('unix')
+			let g:ycm_global_ycm_extra_conf =
+			  \ '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+		endif
 	else
 		let g:neocomplcache_enable_at_startup = 1
 		if !exists('g:neocomplcache_force_omni_patterns')
