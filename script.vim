@@ -42,6 +42,12 @@ if (&loadplugins == 1)
 		if has('win32') || has('win64')
 			let g:clang_library_path =
 			  \ "C:/dev/llvm_build/bin/Release"
+		elseif has('unix')
+			if filereadable(expand(
+			 \ '/usr/local/lib/libclang.so'))
+				let g:clang_library_path =
+				  \ "/usr/local/lib"
+			endif
 		endif
 	endif
 
