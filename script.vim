@@ -9,7 +9,7 @@ if (&loadplugins == 1)
 		let g:gundo_width = 20
 	endif
 
-"YouCompleteMe > clang_complete + neocomplcache
+"YouCompleteMe > neocomplcache + clang_complete + jedi-vim
 	if filereadable(expand(
 	 \ '$VIM/vimfiles/bundle/YouCompleteMe/python/ycm_core.pyd'))
 	 \ ||
@@ -30,7 +30,6 @@ if (&loadplugins == 1)
 			let g:neocomplcache_force_omni_patterns = {}
 		endif
 		let g:neocomplcache_force_overwrite_completefunc = 1
-		let g:clang_complete_auto = 0
 		let g:neocomplcache_force_omni_patterns.c =
 		  \ '[^.[:digit:] *\t]\%(\.\|->\)'
 		let g:neocomplcache_force_omni_patterns.cpp =
@@ -39,15 +38,22 @@ if (&loadplugins == 1)
 		  \ '[^.[:digit:] *\t]\%(\.\|->\)'
 		let g:neocomplcache_force_omni_patterns.objcpp =
 		  \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+		let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
+		let g:clang_complete_auto = 0
 		if has('win32') || has('win64')
-			let g:clang_library_path =
-			  \ "C:/dev/llvm_build/bin/Release"
+			if filereadable(expand(
+			 \ 'C:/dev/llvm_build/bin/Release/libclang.dll'))
+				let g:clang_library_path =
+				  \ "C:/dev/llvm_build/bin/Release"
+			endif
 		elseif has('unix')
 			if filereadable(expand(
 			 \ '/usr/local/lib/libclang.so'))
 				let g:clang_library_path =
 				  \ "/usr/local/lib"
 			endif
+		let g:jedi#popup_on_dot = 0
+		autocmd FileType python setlocal omnifunc=jedi#complete
 		endif
 	endif
 
