@@ -13,7 +13,7 @@ if v:version >= 703
 	autocmd InsertEnter *
 	\ set nocursorcolumn nocursorline relativenumber colorcolumn=
 	autocmd InsertLeave *
-	\ set cursorcolumn cursorline number colorcolumn=40,80
+	\ set cursorcolumn cursorline norelativenumber colorcolumn=40,80
 	set colorcolumn=40,80
 else
 	autocmd InsertEnter * set nocursorcolumn nocursorline
