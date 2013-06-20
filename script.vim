@@ -42,9 +42,9 @@ if (&loadplugins == 1)
 		let g:clang_complete_auto = 0
 		if has('win32') || has('win64')
 			if filereadable(expand(
-			 \ 'C:/dev/llvm_build/bin/Release/libclang.dll'))
+			 \ 'C:/clang/bin/libclang.dll'))
 				let g:clang_library_path =
-				  \ "C:/dev/llvm_build/bin/Release"
+				  \ "C:/clang/bin"
 			endif
 		elseif has('unix')
 			if filereadable(expand(
