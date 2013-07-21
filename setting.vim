@@ -1,7 +1,7 @@
 set nocompatible
 if filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim')) ||
  \ filereadable(expand('$VIMRUNTIME/autoload/pathogen.vim'))
-	call pathogen#infect()
+	execute pathogen#infect()
 endif
 if has('win32') || has('win64')
 	set fileformats=dos,unix
