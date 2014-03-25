@@ -1,8 +1,8 @@
 //Linux
 /etc/vim/vimrc ~/.vimrc
 	/*
-	source /opt/vimrc/setting.vim
-	source /opt/vimrc/script.vim
+	source /opt/repository/git/vimrc/setting.vim
+	source /opt/repository/git/vimrc/script.vim
 	*/
 
 //Windows
