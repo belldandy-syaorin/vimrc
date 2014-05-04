@@ -1,16 +1,14 @@
 //Linux
-/etc/vim/vimrc ~/.vimrc
+~/.vimrc
 	/*
 	source /opt/repository/git/vimrc/setting.vim
 	source /opt/repository/git/vimrc/script.vim
 	*/
 
 //Windows
-$VIM/_vimrc $VIM/vimrc
+$VIM/vimrc
 	/*
-	source $VIM/setting.vim
-	source $VIM/script.vim
+	source C:/repository/git/vimrc/setting.vim
+	source C:/repository/git/vimrc/script.vim
 	source $VIM/vim_pos+size.vim
 	*/
-	source $VIMRUNTIME/vimrc_example.vim //Comment
-	source $VIMRUNTIME/mswin.vim //Comment
