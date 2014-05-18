@@ -45,7 +45,7 @@ if has('gui_running')
 		set guifontwide=MingLiU:h17
 	elseif has('unix')
 		set guifont=Source\ Code\ Pro\ Light\ 14
-		set guifontwide=WenQuanYi\ Micro\ Hei\ Mono\ 17
+		set guifontwide=WenQuanYi\ Micro\ Hei\ Lite\ Mono\ 17
 	endif
 else
 	set statusline=[%t]%m%r%h%w%y
