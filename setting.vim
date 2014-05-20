@@ -4,21 +4,17 @@ if filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim')) ||
 	execute pathogen#infect()
 endif
 if has('win32') || has('win64')
+	set clipboard=unnamed
 	set fileformats=dos,unix
 	set shellcmdflag=/u/c
 elseif has('unix')
+	set clipboard=unnamedplus
 	set fileformats=unix,dos
 endif
-if v:version >= 703
-	autocmd InsertEnter *
-	\ set nocursorcolumn nocursorline relativenumber colorcolumn=
-	autocmd InsertLeave *
-	\ set cursorcolumn cursorline number norelativenumber colorcolumn=40,80
-	set colorcolumn=40,80
-else
-	autocmd InsertEnter * set nocursorcolumn nocursorline
-	autocmd InsertLeave * set cursorcolumn cursorline
-endif
+autocmd InsertEnter *
+\ set cursorcolumn cursorline number norelativenumber colorcolumn=40,80
+autocmd InsertLeave *
+\ set nocursorcolumn nocursorline nonumber relativenumber colorcolumn=
 if has('gui_running')
 	autocmd GUIEnter * winpos 0 0
 	highlight Normal guibg=black guifg=white
@@ -31,10 +27,8 @@ if has('gui_running')
 	set statusline=[%2*%t%*]%3*%m%r%h%w%y%*
 	set statusline+=%=
 	set statusline+=[%1*%{mode()}%*]
-	if v:version >= 703
-		set statusline+=[%1*%{get(undotree(),'seq_cur')}%*/
-		                \%1*%{get(undotree(),'seq_last')}%*]
-	endif
+	set statusline+=[%1*%{get(undotree(),'seq_cur')}%*/
+			\%1*%{get(undotree(),'seq_last')}%*]
 	set statusline+=[%1*%{&encoding}%*]
 	set statusline+=[%1*%{&fileencoding}%*(%1*%{&bomb}%*),%1*%{&fileformat}%*]
 	set statusline+=[%1*%l%*,%1*%c%*(%1*%p%*%%/%1*%L%*)]
@@ -51,10 +45,8 @@ else
 	set statusline=[%t]%m%r%h%w%y
 	set statusline+=%=
 	set statusline+=[%{mode()}]
-	if v:version >= 703
-		set statusline+=[%{get(undotree(),'seq_cur')}/
-		                \%{get(undotree(),'seq_last')}]
-	endif
+	set statusline+=[%{get(undotree(),'seq_cur')}/
+			\%{get(undotree(),'seq_last')}]
 	set statusline+=[%{&encoding}]
 	set statusline+=[%{&fileencoding}(%{&bomb}),%{&fileformat}]
 	set statusline+=[%l,%c(%p%%/%L)]
@@ -63,9 +55,6 @@ set ambiwidth=double
 set autoindent
 set autoread
 set backspace=indent,eol,start
-set clipboard=unnamed
-set cursorcolumn
-set cursorline
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,ucs-2le,taiwan,prc,japan,korea
@@ -76,7 +65,7 @@ set incsearch
 set laststatus=2
 set list
 set listchars=tab:>-,eol:<,trail:=
-set number
+set relativenumber
 set showcmd
 set smartcase
 set smartindent
