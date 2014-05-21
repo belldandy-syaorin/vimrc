@@ -11,10 +11,6 @@ elseif has('unix')
 	set clipboard=unnamedplus
 	set fileformats=unix,dos
 endif
-autocmd InsertEnter *
-\ set cursorcolumn cursorline number norelativenumber colorcolumn=40,80
-autocmd InsertLeave *
-\ set nocursorcolumn nocursorline nonumber relativenumber colorcolumn=
 if has('gui_running')
 	autocmd GUIEnter * winpos 0 0
 	highlight Normal guibg=black guifg=white
@@ -36,10 +32,28 @@ if has('gui_running')
 		autocmd InsertEnter * set noimdisable
 		autocmd InsertLeave * set imdisable
 		set guifont=Source_Code_Pro_Light:h14
-		set guifontwide=MingLiU:h17
+		function! CJK_Font(mode)
+			if a:mode == 0
+				set guifontwide=Migu_1M:h17
+			elseif a:mode == 1
+				set guifontwide=AR_PL_Mingti2L_Big5:h17
+			elseif a:mode == 2
+				set guifontwide=MingLiU:h17
+			endif
+		endfunction
+		call CJK_Font(1)
 	elseif has('unix')
 		set guifont=Source\ Code\ Pro\ Light\ 14
-		set guifontwide=WenQuanYi\ Micro\ Hei\ Lite\ Mono\ 17
+		function! CJK_Font(mode)
+			if a:mode == 0
+				set guifontwide=Migu\ 1M\ 17
+			elseif a:mode == 1
+				set guifontwide=AR\ PL\ UMing\ 17
+			elseif a:mode == 2
+				set guifontwide=WenQuanYi\ Micro\ Hei\ Lite\ Mono\ 17
+			endif
+		endfunction
+		call CJK_Font(0)
 	endif
 else
 	set statusline=[%t]%m%r%h%w%y
@@ -72,7 +86,11 @@ set smartindent
 set splitbelow
 set splitright
 set wrap
-syntax enable
 set nobackup
 set noswapfile
 set nowritebackup
+syntax enable
+autocmd InsertEnter *
+\ set cursorcolumn cursorline number norelativenumber colorcolumn=40,80
+autocmd InsertLeave *
+\ set nocursorcolumn nocursorline nonumber relativenumber colorcolumn=
