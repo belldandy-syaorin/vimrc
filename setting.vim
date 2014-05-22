@@ -41,7 +41,7 @@ if has('gui_running')
 				set guifontwide=MingLiU:h17
 			endif
 		endfunction
-		call CJK_Font(1)
+		call CJK_Font(0)
 	elseif has('unix')
 		set guifont=Source\ Code\ Pro\ Light\ 14
 		function! CJK_Font(mode)
