@@ -1,14 +1,16 @@
 //Linux
 ~/.vimrc
+	add
 	/*
-	source /opt/repository/git/vimrc/setting.vim
-	source /opt/repository/git/vimrc/script.vim
+		source /opt/repository/git/vimrc/setting.vim
+		source /opt/repository/git/vimrc/script.vim
 	*/
 
 //Windows
 $VIM/vimrc
+	add
 	/*
-	source C:/repository/git/vimrc/setting.vim
-	source C:/repository/git/vimrc/script.vim
-	source $VIM/vim_pos+size.vim
+		source C:/repository/git/vimrc/setting.vim
+		source C:/repository/git/vimrc/script.vim
+		source C:/repository/git/vimrc/vim_pos+size.vim
 	*/
