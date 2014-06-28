@@ -31,23 +31,23 @@ if has('python')
 	endfunction
 	function! Vim_Move(mode)
 		if a:mode == 1
-			python sys.argv = ["posnum1"]
+			python sys.argv = ["position1"]
 		elseif a:mode == 2
-			python sys.argv = ["posnum2"]
+			python sys.argv = ["position2"]
 		elseif a:mode == 3
-			python sys.argv = ["posnum3"]
+			python sys.argv = ["position3"]
 		elseif a:mode == 4
-			python sys.argv = ["posnum4"]
+			python sys.argv = ["position4"]
 		elseif a:mode == 5
-			python sys.argv = ["posnum5"]
+			python sys.argv = ["position5"]
 		elseif a:mode == 6
-			python sys.argv = ["posnum6"]
+			python sys.argv = ["position6"]
 		elseif a:mode == 7
-			python sys.argv = ["posnum7"]
+			python sys.argv = ["position7"]
 		elseif a:mode == 8
-			python sys.argv = ["posnum8"]
+			python sys.argv = ["position8"]
 		elseif a:mode == 9
-			python sys.argv = ["posnum9"]
+			python sys.argv = ["position9"]
 		endif
 		call Vim_Py()
 	endfunction
