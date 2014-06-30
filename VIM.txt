@@ -1,6 +1,5 @@
 //Linux
 ~/.vimrc
-	add
 	/*
 		source /opt/repository/git/vimrc/setting.vim
 		source /opt/repository/git/vimrc/script.vim
@@ -8,7 +7,6 @@
 
 //Windows
 $VIM/vimrc
-	add
 	/*
 		source C:/repository/git/vimrc/setting.vim
 		source C:/repository/git/vimrc/script.vim
