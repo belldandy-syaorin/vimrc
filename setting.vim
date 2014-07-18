@@ -34,11 +34,9 @@ if has('gui_running')
 		set guifont=Source_Code_Pro_Light:h14
 		function! CJK_Font(mode)
 			if a:mode == 0
-				set guifontwide=Migu_1M:h17
+				set guifontwide=Migu_1M:h16
 			elseif a:mode == 1
-				set guifontwide=AR_PL_Mingti2L_Big5:h17
-			elseif a:mode == 2
-				set guifontwide=MingLiU:h17
+				set guifontwide=MingLiU:h16
 			endif
 		endfunction
 		call CJK_Font(0)
@@ -46,11 +44,13 @@ if has('gui_running')
 		set guifont=Source\ Code\ Pro\ Light\ 14
 		function! CJK_Font(mode)
 			if a:mode == 0
-				set guifontwide=Migu\ 1M\ 17
+				set guifontwide=Source\ Han\ Sans\ TWHK\ Light\ 16
 			elseif a:mode == 1
-				set guifontwide=AR\ PL\ UMing\ 17
+				set guifontwide=Source\ Han\ Sans\ CN\ Light\ 16
 			elseif a:mode == 2
-				set guifontwide=WenQuanYi\ Micro\ Hei\ Lite\ Mono\ 17
+				set guifontwide=Source\ Han\ Sans\ JP\ Light\ 16
+			elseif a:mode == 3
+				set guifontwide=Source\ Han\ Sans\ KR\ Light\ 16
 			endif
 		endfunction
 		call CJK_Font(0)
