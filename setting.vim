@@ -34,9 +34,9 @@ if has('gui_running')
 		set guifont=Source_Code_Pro_Light:h14
 		function! CJK_Font(mode)
 			if a:mode == 0
-				set guifontwide=Migu_1M:h16
-			elseif a:mode == 1
 				set guifontwide=MingLiU:h16
+			elseif a:mode == 1
+				set guifontwide=Migu_1M:h16
 			endif
 		endfunction
 		call CJK_Font(0)
