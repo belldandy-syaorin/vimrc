@@ -38,6 +38,7 @@ if has('gui_running')
 			elseif a:mode == 1
 				set guifontwide=Migu_1M:h16
 			endif
+			set guifontwide
 		endfunction
 		call CJK_Font(0)
 	elseif has('unix')
@@ -52,6 +53,7 @@ if has('gui_running')
 			elseif a:mode == 3
 				set guifontwide=Source\ Han\ Sans\ KR\ Light\ 16
 			endif
+			set guifontwide
 		endfunction
 		call CJK_Font(0)
 	endif
