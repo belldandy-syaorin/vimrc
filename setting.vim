@@ -44,7 +44,7 @@ if has('gui_running')
 		set guifont=Source\ Code\ Pro\ Light\ 14
 		function! CJK_Font(mode)
 			if a:mode == 0
-				set guifontwide=Source\ Han\ Sans\ TWHK\ Light\ 16
+				set guifontwide=Source\ Han\ Sans\ TW\ Light\ 16
 			elseif a:mode == 1
 				set guifontwide=Source\ Han\ Sans\ CN\ Light\ 16
 			elseif a:mode == 2
