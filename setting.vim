@@ -12,7 +12,6 @@ elseif has('unix')
 	set fileformats=unix,dos
 endif
 if has('gui_running')
-	autocmd GUIEnter * winpos 0 0
 	highlight Normal guibg=black guifg=white
 	highlight User1 guibg=white guifg=red
 	highlight User2 guibg=white guifg=lightred
@@ -29,14 +28,15 @@ if has('gui_running')
 	set statusline+=[%1*%{&fileencoding}%*(%1*%{&bomb}%*),%1*%{&fileformat}%*]
 	set statusline+=[%1*%l%*,%1*%c%*(%1*%p%*%%/%1*%L%*)]
 	if has('win32') || has('win64')
+		autocmd GUIEnter * winpos 0 0
 		autocmd InsertEnter * set noimdisable
 		autocmd InsertLeave * set imdisable
 		set guifont=Source_Code_Pro_Light:h14
 		function! CJK_Font(mode)
 			if a:mode == 0
-				set guifontwide=MingLiU:h16
-			elseif a:mode == 1
 				set guifontwide=Migu_1M:h16
+			elseif a:mode == 1
+				set guifontwide=MingLiU:h16
 			endif
 		endfunction
 		call CJK_Font(0)
