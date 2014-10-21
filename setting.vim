@@ -69,6 +69,7 @@ set ambiwidth=double
 set autoindent
 set autoread
 set backspace=indent,eol,start
+set cursorline
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,ucs-2le,taiwan,prc,japan,korea
@@ -87,10 +88,11 @@ set splitbelow
 set splitright
 set wrap
 set nobackup
+set nocursorcolumn
 set noswapfile
 set nowritebackup
 syntax enable
 autocmd InsertEnter *
-\ set cursorcolumn cursorline number norelativenumber colorcolumn=40,80
+\ set cursorcolumn nocursorline number norelativenumber colorcolumn=40,80
 autocmd InsertLeave *
-\ set nocursorcolumn nocursorline nonumber relativenumber colorcolumn=
+\ set nocursorcolumn cursorline nonumber relativenumber colorcolumn=
