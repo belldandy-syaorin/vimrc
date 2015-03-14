@@ -21,6 +21,21 @@ if has('python')
 		endif
 		call Vim_Py()
 	endfunction
+	function! Vim_Size_Select()
+		if !exists("s:vim_size_select")
+			let s:vim_size_select = 0
+		endif
+		if s:vim_size_select == 0
+			call Vim_Size(0)
+			let s:vim_size_select = 1
+		elseif s:vim_size_select == 1
+			call Vim_Size(1)
+			let s:vim_size_select = 2
+		elseif s:vim_size_select == 2
+			call Vim_Size(2)
+			let s:vim_size_select = 0
+		endif
+	endfunction
 	function! Vim_Top(mode)
 		if a:mode == 0
 			python sys.argv = ["untop"]
@@ -28,6 +43,18 @@ if has('python')
 			python sys.argv = ["top"]
 		endif
 		call Vim_Py()
+	endfunction
+	function! Vim_Top_Select()
+		if !exists("s:vim_top_select")
+			let s:vim_top_select = 1
+		endif
+		if s:vim_top_select == 0
+			call Vim_Top(0)
+			let s:vim_top_select = 1
+		elseif s:vim_top_select == 1
+			call Vim_Top(1)
+			let s:vim_top_select = 0
+		endif
 	endfunction
 	function! Vim_Move(mode)
 		if a:mode == 1
@@ -54,9 +81,6 @@ if has('python')
 	nnoremap <F4> :call Vim_Pos(0)<CR>
 	nnoremap <S-F4> :call Vim_Pos(1)<CR>
 	nnoremap <C-F4> :call Vim_Move()
-	nnoremap <F5> :call Vim_Size(0)<CR>
-	nnoremap <S-F5> :call Vim_Size(1)<CR>
-	nnoremap <C-F5> :call Vim_Size(2)<CR>
-	nnoremap <F6> :call Vim_Top(0)<CR>
-	nnoremap <S-F6> :call Vim_Top(1)<CR>
+	nnoremap <F5> :call Vim_Size_Select()<CR>
+	nnoremap <F6> :call Vim_Top_Select()<CR>
 endif
