@@ -1,4 +1,5 @@
 from win32api import GetSystemMetrics
+from win32api import GetCursorPos
 import win32gui
 import sys
 import vim
@@ -15,7 +16,7 @@ center_x = (resolution_w - vim_rect_w) / 2
 center_y = (resolution_h - vim_rect_h) / 2
 smart_x = [resolution_w / 3, resolution_w / 3 * 2, resolution_w, resolution_w - vim_rect_w]
 smart_y = [resolution_h / 3, resolution_h / 3 * 2, resolution_h, resolution_h - vim_rect_h]
-wincenter = [vim_rect_x + (vim_rect_w / 2), vim_rect_y + (vim_rect_h / 2)]
+wincenter = GetCursorPos()
 big = [1024, 768]
 large = [1280, 960]
 

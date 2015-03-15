@@ -78,9 +78,9 @@ if has('python')
 		endif
 		call Vim_Py()
 	endfunction
-	nnoremap <F4> :call Vim_Pos(0)<CR>
-	nnoremap <S-F4> :call Vim_Pos(1)<CR>
-	nnoremap <C-F4> :call Vim_Move()
+	nnoremap <F3> :call Vim_Pos(0)<CR>
+	nnoremap <F4> :call Vim_Pos(1)<CR>
+	nnoremap <S-F4> :call Vim_Move()
 	nnoremap <F5> :call Vim_Size_Select()<CR>
 	nnoremap <F6> :call Vim_Top_Select()<CR>
 endif
