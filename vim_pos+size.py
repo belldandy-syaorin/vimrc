@@ -1,9 +1,13 @@
-from win32api import GetSystemMetrics
 from win32api import GetCursorPos
-import win32gui
-import sys
-import vim
+from win32api import GetSystemMetrics
+# from PyQt4 import QtGui
+import sys , vim , win32gui
 
+"""
+app = QtGui.QApplication([])
+resolution_w = QtGui.QDesktopWidget().screenGeometry().width()
+resolution_h = QtGui.QDesktopWidget().screenGeometry().height()
+"""
 resolution_w = GetSystemMetrics(0)
 resolution_h = GetSystemMetrics(1)
 hwnd = win32gui.GetActiveWindow()
@@ -17,6 +21,7 @@ center_y = (resolution_h - vim_rect_h) / 2
 smart_x = [resolution_w / 3, resolution_w / 3 * 2, resolution_w, resolution_w - vim_rect_w]
 smart_y = [resolution_h / 3, resolution_h / 3 * 2, resolution_h, resolution_h - vim_rect_h]
 wincenter = GetCursorPos()
+# wincenter = [QtGui.QCursor().pos().x() , QtGui.QCursor().pos().y()]
 big = [1024, 768]
 large = [1280, 960]
 
@@ -60,12 +65,16 @@ class vim_move:
 def mode_normal():
     if vim_rect_x != center_x and vim_rect_y != center_y:
         vm.position5()
-    elif vim_rect_x == center_x and vim_rect_y == center_y:
-        vm.position4()
-    elif vim_rect_x == 0 and vim_rect_y == center_y:
-        vm.position6()
-    elif vim_rect_x == smart_x[3] and vim_rect_y == center_y:
-        vm.position5()
+    elif vim_rect_y == center_y:
+        if vim_rect_x == center_x:
+            vm.position4()
+        elif vim_rect_x == 0:
+            vm.position6()
+        elif vim_rect_x == smart_x[3]:
+            vm.position5()
+    elif vim_rect_x == center_x:
+        if vim_rect_y == 0 or vim_rect_y == smart_y[3]:
+            vm.position5()
 
 def mode_smart():
     if wincenter[0] >= 0 and wincenter[0] <= smart_x[0]:
