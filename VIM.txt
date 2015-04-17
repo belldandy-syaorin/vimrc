@@ -10,5 +10,4 @@ $VIM/vimrc
 	/*
 		source C:/repository/git/vimrc/setting.vim
 		source C:/repository/git/vimrc/script.vim
-		source C:/repository/git/vimrc/vim_pos+size.vim
 	*/
