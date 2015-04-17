@@ -1,7 +1,8 @@
 if has('python')
 	python import sys
+	let s:vim_pyfilepath = expand('<sfile>:r') . '.py'
 	function! Vim_Py()
-		execute 'pyfile ' . 'C:/repository/git/vimrc/vim_pos+size.py'
+		execute 'pyfile ' s:vim_pyfilepath
 	endfunction
 	function! Vim_Pos(mode)
 		if a:mode == 0
