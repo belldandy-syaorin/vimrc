@@ -8,4 +8,10 @@ if (&loadplugins == 1)
 	autocmd FileType python setlocal omnifunc=jedi#completions
 	let g:jedi#auto_vim_configuration = 0
 	let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
+" vim_wm
+	if has('win32') || has('win64')
+		if !exists("g:enable_vim_wm_defaulthotkey")
+			let g:enable_vim_wm_defaulthotkey = 1
+		endif
+	endif
 endif
