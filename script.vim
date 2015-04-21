@@ -11,7 +11,7 @@ if (&loadplugins == 1)
 " win
 	if has('win32') || has('win64')
 	" setting
-		nnoremap <F7> :call CJK_Font_Select()<CR>
+		nnoremap <F7> :call CJK_Font_Select()<CR>:echo 'guifontwide ="&guifontwide<CR>
 	" vim_wm
 		if !exists("g:enable_vim_wm_defaulthotkey")
 			let g:enable_vim_wm_defaulthotkey = 1
