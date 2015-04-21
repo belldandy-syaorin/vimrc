@@ -67,10 +67,6 @@ if has('gui_running')
 			let s:cjk_font_select = 0
 		endif
 	endfunction
-	if exists("g:enable_setting_defaulthotkey") &&
-	 \ g:enable_setting_defaulthotkey == 1
-		nnoremap <F7> :call CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
-	endif
 	call CJK_Font(0)
 else
 	set statusline=[%t]%m%r%h%w%y
