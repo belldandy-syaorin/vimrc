@@ -3,13 +3,13 @@ if filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim')) ||
  \ filereadable(expand('$VIMRUNTIME/autoload/pathogen.vim'))
 	execute pathogen#infect()
 endif
-if has('win32') || has('win64')
+if has('unix')
+	set clipboard=unnamedplus
+	set fileformats=unix,dos
+elseif has('win32') || has('win64')
 	set clipboard=unnamed
 	set fileformats=dos,unix
 	set shellcmdflag=/u/c
-elseif has('unix')
-	set clipboard=unnamedplus
-	set fileformats=unix,dos
 endif
 if has('gui_running')
 	highlight Normal guibg=black guifg=white
@@ -27,22 +27,7 @@ if has('gui_running')
 	set statusline+=[%1*%{&encoding}%*]
 	set statusline+=[%1*%{&fileencoding}%*(%1*%{&bomb}%*),%1*%{&fileformat}%*]
 	set statusline+=[%1*%l%*,%1*%c%*(%1*%p%*%%/%1*%L%*)]
-	if has('win32') || has('win64')
-		autocmd GUIEnter * winpos 0 0
-		autocmd InsertEnter * set noimdisable
-		autocmd InsertLeave * set imdisable
-		set guifont=Source_Code_Pro_Light:h14
-		function! CJK_Font(mode)
-			if a:mode == 0
-				set guifontwide=Gen_Shin_Gothic_Monospace_Light:h16
-			elseif a:mode == 1
-				set guifontwide=Gen_Jyuu_Gothic_Monospace_Light:h16
-			elseif a:mode == 2
-				set guifontwide=HanaMinA:h16
-			endif
-		endfunction
-		call CJK_Font(0)
-	elseif has('unix')
+	if has('unix')
 		set guifont=Source\ Code\ Pro\ Light\ 14
 		function! CJK_Font(mode)
 			if a:mode == 0
@@ -55,8 +40,42 @@ if has('gui_running')
 				set guifontwide=Source\ Han\ Sans\ KR\ Light\ 16
 			endif
 		endfunction
-		call CJK_Font(0)
+	elseif has('win32') || has('win64')
+		autocmd GUIEnter * winpos 0 0
+		autocmd InsertEnter * set noimdisable
+		autocmd InsertLeave * set imdisable
+		set guifont=Source_Code_Pro_Light:h14
+		function! CJK_Font(mode)
+			if a:mode == 0
+				set guifontwide=Gen_Jyuu_Gothic_Monospace_Light:h16
+			elseif a:mode == 1
+				set guifontwide=Gen_Shin_Gothic_Monospace_Light:h16
+			elseif a:mode == 2
+				set guifontwide=HanaMinA:h16
+			elseif a:mode == 3
+				set guifontwide=MingLiU:h16
+			endif
+		endfunction
 	endif
+	function! CJK_Font_Select()
+		if !exists("s:cjk_font_select")
+			let s:cjk_font_select = 1
+		endif
+		if s:cjk_font_select == 0
+			call CJK_Font(0)
+			let s:cjk_font_select = 1
+		elseif s:cjk_font_select == 1
+			call CJK_Font(1)
+			let s:cjk_font_select = 2
+		elseif s:cjk_font_select == 2
+			call CJK_Font(2)
+			let s:cjk_font_select = 3
+		elseif s:cjk_font_select == 3
+			call CJK_Font(3)
+			let s:cjk_font_select = 0
+		endif
+	endfunction
+	call CJK_Font(0)
 else
 	set statusline=[%t]%m%r%h%w%y
 	set statusline+=%=
