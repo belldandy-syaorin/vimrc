@@ -3,14 +3,6 @@ if filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim')) ||
  \ filereadable(expand('$VIMRUNTIME/autoload/pathogen.vim'))
 	execute pathogen#infect()
 endif
-if has('unix')
-	set clipboard=unnamedplus
-	set fileformats=unix,dos
-elseif has('win32') || has('win64')
-	set clipboard=unnamed
-	set fileformats=dos,unix
-	set shellcmdflag=/u/c
-endif
 if has('gui_running')
 	highlight Normal guibg=black guifg=white
 	highlight User1 guibg=white guifg=red
@@ -75,6 +67,10 @@ if has('gui_running')
 			let s:cjk_font_select = 0
 		endif
 	endfunction
+	if exists("g:enable_setting_defaulthotkey") &&
+	 \ g:enable_setting_defaulthotkey == 1
+		nnoremap <F7> :call CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
+	endif
 	call CJK_Font(0)
 else
 	set statusline=[%t]%m%r%h%w%y
@@ -85,6 +81,14 @@ else
 	set statusline+=[%{&encoding}]
 	set statusline+=[%{&fileencoding}(%{&bomb}),%{&fileformat}]
 	set statusline+=[%l,%c(%p%%/%L)]
+endif
+if has('unix')
+	set clipboard=unnamedplus
+	set fileformats=unix,dos
+elseif has('win32') || has('win64')
+	set clipboard=unnamed
+	set fileformats=dos,unix
+	set shellcmdflag=/u/c
 endif
 set ambiwidth=double
 set autoindent

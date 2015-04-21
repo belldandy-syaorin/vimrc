@@ -4,14 +4,16 @@ if (&loadplugins == 1)
 	if !exists('g:neocomplcache_force_omni_patterns')
 		let g:neocomplcache_force_omni_patterns = {}
 	endif
-" jedi-vim
+	" jedi-vim
 	autocmd FileType python setlocal omnifunc=jedi#completions
 	let g:jedi#auto_vim_configuration = 0
 	let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
 " win
 	if has('win32') || has('win64')
 	" setting
-		nnoremap <F7> :call CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
+		if !exists("g:enable_setting_defaulthotkey")
+			let g:enable_setting_defaulthotkey = 1
+		endif
 	" vim_wm
 		if !exists("g:enable_vim_wm_defaulthotkey")
 			let g:enable_vim_wm_defaulthotkey = 1
