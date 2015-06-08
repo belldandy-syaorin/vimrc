@@ -4,8 +4,6 @@
 	endif
 " loadplugins
 if (&loadplugins == 1)
-	" vim-diff-enhanced
-		autocmd VimEnter * PatienceDiff
 	" neocomplcache
 		let g:neocomplcache_enable_at_startup = 1
 		if !exists('g:neocomplcache_force_omni_patterns')
@@ -19,6 +17,8 @@ if (&loadplugins == 1)
 			nnoremap <F2> :VCSDiff<CR>
 			nnoremap <S-F2> :VCSVimDiff<CR>
 		endif
+	" vim-diff-enhanced
+		autocmd VimEnter * PatienceDiff
 	" vim_wm
 		if has('win32') || has('win64')
 			if has('gui_running')
