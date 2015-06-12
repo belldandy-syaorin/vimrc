@@ -91,6 +91,7 @@ set autoindent
 set autoread
 set backspace=indent,eol,start
 set cursorline
+set diffopt=filler,horizontal
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,ucs-2le,taiwan,prc,japan,korea
