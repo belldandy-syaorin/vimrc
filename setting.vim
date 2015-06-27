@@ -95,6 +95,7 @@ set diffopt=filler,horizontal
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,ucs-bom,ucs-2le,taiwan,prc,japan,korea
+set foldcolumn=1
 set foldmethod=indent
 set hlsearch
 set ignorecase
