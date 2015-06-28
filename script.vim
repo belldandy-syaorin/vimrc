@@ -21,10 +21,8 @@ if (&loadplugins == 1)
 		autocmd VimEnter * PatienceDiff
 	" vim_wm
 		if has('win32') || has('win64')
-			if has('gui_running')
-				if !exists("g:enable_vim_wm_defaulthotkey")
-					let g:enable_vim_wm_defaulthotkey = 1
-				endif
+			if !exists("g:enable_vim_wm_defaulthotkey")
+				let g:enable_vim_wm_defaulthotkey = 1
 			endif
 		endif
 endif
