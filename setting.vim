@@ -119,3 +119,9 @@ autocmd InsertEnter *
 \ set cursorcolumn nocursorline number norelativenumber colorcolumn=40,80
 autocmd InsertLeave *
 \ set nocursorcolumn cursorline nonumber relativenumber colorcolumn=
+noremap! <A-h> <Left>
+noremap! <A-l> <Right>
+noremap! <A-j> <Down>
+noremap! <A-k> <Up>
+inoremap <A-w> <C-O>w
+inoremap <A-b> <C-O>b
