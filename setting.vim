@@ -19,12 +19,6 @@ if has('gui_running')
 	set statusline+=[%1*%{&encoding}%*]
 	set statusline+=[%1*%{&fileencoding}%*(%1*%{&bomb}%*),%1*%{&fileformat}%*]
 	set statusline+=[%1*%l%*,%1*%c%*(%1*%p%*%%/%1*%L%*)]
-	noremap! <A-h> <Left>
-	noremap! <A-l> <Right>
-	noremap! <A-j> <Down>
-	noremap! <A-k> <Up>
-	inoremap <A-w> <C-O>w
-	inoremap <A-b> <C-O>b
 	if has('unix')
 		set guifont=Source\ Code\ Pro\ Light\ 14
 		function! CJK_Font(mode)
@@ -125,3 +119,9 @@ autocmd InsertEnter *
 \ set cursorcolumn nocursorline number norelativenumber colorcolumn=40,80
 autocmd InsertLeave *
 \ set nocursorcolumn cursorline nonumber relativenumber colorcolumn=
+noremap! <A-h> <Left>
+noremap! <A-l> <Right>
+noremap! <A-j> <Down>
+noremap! <A-k> <Up>
+inoremap <A-w> <C-O>w
+inoremap <A-b> <C-O>b
