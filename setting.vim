@@ -64,13 +64,13 @@ elseif has('win32') || has('win64')
 		set guifont=Source_Code_Pro_Light:h14
 		function! CJK_Font(mode)
 			if a:mode == 0
-				set guifontwide=Gen_Jyuu_Gothic_Monospace_Light:h16
+				set guifontwide=Gen_Jyuu_Gothic_Monospace_Extra:h16
 			elseif a:mode == 1
-				set guifontwide=Gen_Shin_Gothic_Monospace_Light:h16
+				set guifontwide=Gen_Shin_Gothic_Monospace_Extra:h16
 			elseif a:mode == 2
-				set guifontwide=HanaMinA:h16
+				set guifontwide=HanaMinA:h17
 			elseif a:mode == 3
-				set guifontwide=MingLiU:h16
+				set guifontwide=KaiGen_Gothic_HW_TW_Regular:h16
 			endif
 		endfunction
 	endif
