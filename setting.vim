@@ -70,7 +70,7 @@ elseif has('win32') || has('win64')
 			elseif a:mode == 2
 				set guifontwide=HanaMinA:h17
 			elseif a:mode == 3
-				set guifontwide=KaiGen_Gothic_HW_TW_Regular:h16
+				set guifontwide=MingLiU:h17
 			endif
 		endfunction
 	endif
