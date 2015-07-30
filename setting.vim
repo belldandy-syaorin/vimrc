@@ -73,6 +73,10 @@ elseif has('win32') || has('win64')
 				set guifontwide=MingLiU:h17
 			endif
 		endfunction
+		function! s:ModCmdBackSlash()
+			return substitute(getcmdline(), '\\ ', ' ', 'g')
+		endfunction
+		cnoremap <A-m> <C-\>e(<SID>ModCmdBackSlash())<CR>
 	endif
 endif
 if has('gui_running')
