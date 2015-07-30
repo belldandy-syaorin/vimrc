@@ -1,7 +1,3 @@
-" setting
-	if has('gui_running')
-		nnoremap <F7> :call CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
-	endif
 " loadplugins
 if (&loadplugins == 1)
 	" neocomplcache

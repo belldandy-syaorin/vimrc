@@ -99,6 +99,7 @@ if has('gui_running')
 			let s:cjk_font_select = 0
 		endif
 	endfunction
+	nnoremap <F7> :call CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
 	highlight Normal guibg=black guifg=white
 	highlight User1 guibg=white guifg=red
 	highlight User2 guibg=white guifg=lightred
