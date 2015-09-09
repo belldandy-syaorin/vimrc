@@ -1,5 +1,7 @@
 " loadplugins
 if (&loadplugins == 1)
+	" jedi-vim
+		let g:jedi#force_py_version = 2
 	" neocomplcache
 		let g:neocomplcache_enable_at_startup = 1
 		if !exists('g:neocomplcache_force_omni_patterns')
