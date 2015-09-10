@@ -15,7 +15,6 @@ if (&loadplugins == 1)
 	" vcscommand
 		if has('gui_running')
 			nnoremap <F2> :VCSDiff<CR>
-			nnoremap <S-F2> :VCSVimDiff<CR>
 		endif
 	" vim-diff-enhanced
 		autocmd VimEnter * PatienceDiff
