@@ -1,6 +1,14 @@
 set nocompatible
 if filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim')) ||
  \ filereadable(expand('$VIMRUNTIME/autoload/pathogen.vim'))
+	let s:use_pathogen = 1
+endif
+if has('unix') && $USER == 'root'
+	let s:use_root = 1
+else
+	let s:use_root = 0
+endif
+if s:use_pathogen == 1 && s:use_root == 0
 	execute pathogen#infect()
 endif
 set ambiwidth=double
@@ -135,7 +143,7 @@ elseif v:version >= 703
 	set cryptmethod=blowfish
 endif
 " loadplugins
-if (&loadplugins == 1)
+if (&loadplugins == 1) && s:use_root == 0
 	" jedi-vim
 		if has('python') && has('python3')
 			let g:jedi#force_py_version = 2
