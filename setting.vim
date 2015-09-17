@@ -2,6 +2,8 @@ set nocompatible
 if filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim')) ||
  \ filereadable(expand('$VIMRUNTIME/autoload/pathogen.vim'))
 	let s:use_pathogen = 1
+else
+	let s:use_pathogen = 0
 endif
 if has('unix') && $USER == 'root'
 	let s:use_root = 1
