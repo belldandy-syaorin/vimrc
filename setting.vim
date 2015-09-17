@@ -145,7 +145,7 @@ elseif v:version >= 703
 	set cryptmethod=blowfish
 endif
 " loadplugins
-if (&loadplugins == 1) && s:use_root == 0
+if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 	" jedi-vim
 		if has('python') && has('python3')
 			let g:jedi#force_py_version = 2
