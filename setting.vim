@@ -94,6 +94,9 @@ if has('gui_running')
 	noremap! <A-l> <Right>
 	noremap! <A-j> <Down>
 	noremap! <A-k> <Up>
+	noremap! <A-w> <C-o>w
+	noremap! <A-b> <C-o>b
+	noremap! <A-e> <C-o>e
 	call CJK_Font(0)
 	function! CJK_Font_Select()
 		if !exists("s:cjk_font_select")
