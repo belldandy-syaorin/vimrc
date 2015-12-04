@@ -119,8 +119,8 @@ if has('gui_running')
 	nnoremap <F7> :call CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
 	highlight Normal guibg=black guifg=white
 	highlight User1 guibg=white guifg=red
-	highlight User2 guibg=white guifg=lightred
-	highlight User3 guibg=white guifg=darkred
+	highlight User2 guibg=white guifg=green
+	highlight User3 guibg=white guifg=blue
 	set guioptions-=e
 	set guioptions-=m
 	set guioptions-=T
