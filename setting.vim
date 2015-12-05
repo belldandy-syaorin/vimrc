@@ -51,7 +51,7 @@ if has('unix')
 	set fileformats=unix,dos
 	if has('gui_running')
 		set guifont=Source\ Code\ Pro\ Light\ 14
-		function! CJK_Font(mode)
+		function! s:CJK_Font(mode)
 			if a:mode == 0
 				set guifontwide=Source\ Han\ Sans\ TW\ Light\ 16
 			elseif a:mode == 1
@@ -72,7 +72,7 @@ elseif has('win32') || has('win64')
 		autocmd InsertEnter * set noimdisable
 		autocmd InsertLeave * set imdisable
 		set guifont=Source_Code_Pro_Light:h14
-		function! CJK_Font(mode)
+		function! s:CJK_Font(mode)
 			if a:mode == 0
 				set guifontwide=Gen_Jyuu_Gothic_Monospace_Extra:h16
 			elseif a:mode == 1
@@ -97,27 +97,51 @@ if has('gui_running')
 	noremap! <A-w> <C-o>w
 	noremap! <A-b> <C-o>b
 	noremap! <A-e> <C-o>e
-	nnoremap <F3> :let g:highlightfilepath=substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g')<CR>:execute 'source ' g:highlightfilepath<CR>
-	call CJK_Font(0)
-	function! CJK_Font_Select()
+	call <SID>CJK_Font(0)
+	function! s:Highlight_From_File_Path(mode)
+		let s:highlightfromfilepath = substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g')
+		if a:mode == 0 && filereadable(s:highlightfromfilepath)
+			syntax clear
+			echo 'Highlight From File Path = Disable'
+		elseif a:mode == 1 && filereadable(s:highlightfromfilepath)
+			execute 'source ' s:highlightfromfilepath
+			echo 'Highlight From File Path = Enable'
+		else
+			echo 'Highlight From File Path = n/a'
+		endif
+	endfunction
+	function! s:Highlight_From_File_Path_Select()
+		if !exists("s:highlight_file_path_select")
+			let s:highlight_file_path_select = 1
+		endif
+		if s:highlight_file_path_select == 0
+			call <SID>Highlight_From_File_Path(0)
+			let s:highlight_file_path_select = 1
+		elseif s:highlight_file_path_select == 1
+			call <SID>Highlight_From_File_Path(1)
+			let s:highlight_file_path_select = 0
+		endif
+	endfunction
+	nnoremap <F3> :call <SID>Highlight_From_File_Path_Select()<CR>
+	function! s:CJK_Font_Select()
 		if !exists("s:cjk_font_select")
 			let s:cjk_font_select = 1
 		endif
 		if s:cjk_font_select == 0
-			call CJK_Font(0)
+			call <SID>CJK_Font(0)
 			let s:cjk_font_select = 1
 		elseif s:cjk_font_select == 1
-			call CJK_Font(1)
+			call <SID>CJK_Font(1)
 			let s:cjk_font_select = 2
 		elseif s:cjk_font_select == 2
-			call CJK_Font(2)
+			call <SID>CJK_Font(2)
 			let s:cjk_font_select = 3
 		elseif s:cjk_font_select == 3
-			call CJK_Font(3)
+			call <SID>CJK_Font(3)
 			let s:cjk_font_select = 0
 		endif
 	endfunction
-	nnoremap <F4> :call CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
+	nnoremap <F4> :call <SID>CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
 	highlight Normal guibg=black guifg=white
 	highlight User1 guibg=white guifg=red
 	highlight User2 guibg=white guifg=green
