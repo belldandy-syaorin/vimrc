@@ -97,7 +97,7 @@ if has('gui_running')
 	noremap! <A-w> <C-o>w
 	noremap! <A-b> <C-o>b
 	noremap! <A-e> <C-o>e
-	nnoremap <F3> :let g:highlightfilepath=substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g')<CR>:execute 'source ' g:highlightfilepath<CR><CR>
+	nnoremap <F3> :let g:highlightfilepath=substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g')<CR>:execute 'source ' g:highlightfilepath<CR>
 	call CJK_Font(0)
 	function! CJK_Font_Select()
 		if !exists("s:cjk_font_select")
@@ -117,7 +117,7 @@ if has('gui_running')
 			let s:cjk_font_select = 0
 		endif
 	endfunction
-	nnoremap <F7> :call CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
+	nnoremap <F4> :call CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
 	highlight Normal guibg=black guifg=white
 	highlight User1 guibg=white guifg=red
 	highlight User2 guibg=white guifg=green
