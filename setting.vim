@@ -104,7 +104,12 @@ if has('gui_running')
 			syntax clear
 			echo 'Highlight From File Path = Disable'
 		elseif a:mode == 1 && filereadable(s:highlightfromfilepath)
-			execute 'source ' s:highlightfromfilepath
+			if has('unix')
+				let s:highlightfromfilepath = substitute(substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g'), '\ ', '\\\ ', 'g')
+				execute 'source ' s:highlightfromfilepath
+			elseif has('win32') || has('win64')
+				execute 'source ' s:highlightfromfilepath
+			endif
 			echo 'Highlight From File Path = Enable'
 		else
 			echo 'Highlight From File Path = n/a'
