@@ -110,21 +110,31 @@ if has('gui_running')
 			elseif has('win32') || has('win64')
 				execute 'source ' s:highlightfromfilepath
 			endif
-			echo 'Highlight From File Path = Enable'
+			if g:highlight_file_path_advanced == 0
+				echo 'Highlight From File Path = Enable'
+			elseif g:highlight_file_path_advanced == 1
+				echo 'Highlight From File Path = Enable (Advanced)'
+			endif
 		else
 			echo 'Highlight From File Path = n/a'
 		endif
 	endfunction
 	function! s:Highlight_From_File_Path_Select()
-		if !exists("s:highlight_file_path_select")
+		if !exists("s:highlight_file_path_select") && !exists("g:highlight_file_path_advanced")
 			let s:highlight_file_path_select = 1
+			let g:highlight_file_path_advanced = 0
 		endif
 		if s:highlight_file_path_select == 0
 			call <SID>Highlight_From_File_Path(0)
 			let s:highlight_file_path_select = 1
 		elseif s:highlight_file_path_select == 1
 			call <SID>Highlight_From_File_Path(1)
+			let s:highlight_file_path_select = 2
+			let g:highlight_file_path_advanced = 1
+		elseif s:highlight_file_path_select == 2
+			call <SID>Highlight_From_File_Path(1)
 			let s:highlight_file_path_select = 0
+			let g:highlight_file_path_advanced = 0
 		endif
 	endfunction
 	nnoremap <F3> :call <SID>Highlight_From_File_Path_Select()<CR>
