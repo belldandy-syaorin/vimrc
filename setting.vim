@@ -94,9 +94,6 @@ if has('gui_running')
 	noremap! <A-l> <Right>
 	noremap! <A-j> <Down>
 	noremap! <A-k> <Up>
-	noremap! <A-w> <C-o>w
-	noremap! <A-b> <C-o>b
-	noremap! <A-e> <C-o>e
 	call <SID>CJK_Font(0)
 	function! s:Highlight_From_File_Path(mode)
 		let s:highlightfromfilepath = substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g')
