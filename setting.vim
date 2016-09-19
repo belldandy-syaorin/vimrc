@@ -179,7 +179,9 @@ else
 	set statusline+=[%{&fileencoding}(%{&bomb}),%{&fileformat}]
 	set statusline+=[%l,%c(%p%%/%L)]
 endif
-if v:version >= 704 && has('patch399')
+if v:version >= 800
+	set cryptmethod=blowfish2
+elseif v:version >= 704 && has('patch399')
 	set cryptmethod=blowfish2
 elseif v:version >= 703
 	set cryptmethod=blowfish
