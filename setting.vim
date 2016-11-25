@@ -53,13 +53,13 @@ if has('unix')
 		set guifont=Source\ Code\ Pro\ Light\ 14
 		function! s:CJK_Font(mode)
 			if a:mode == 0
-				set guifontwide=Source\ Han\ Sans\ TW\ Light\ 16
+				set guifontwide=Noto\ Sans\ CJK\ TW\ Light\ 16
 			elseif a:mode == 1
-				set guifontwide=Source\ Han\ Sans\ CN\ Light\ 16
+				set guifontwide=Noto\ Sans\ CJK\ CN\ Light\ 16
 			elseif a:mode == 2
-				set guifontwide=Source\ Han\ Sans\ JP\ Light\ 16
+				set guifontwide=Noto\ Sans\ CJK\ JP\ Light\ 16
 			elseif a:mode == 3
-				set guifontwide=Source\ Han\ Sans\ KR\ Light\ 16
+				set guifontwide=Noto\ Sans\ CJK\ KR\ Light\ 16
 			endif
 		endfunction
 	endif
@@ -78,9 +78,9 @@ elseif has('win32') || has('win64')
 			elseif a:mode == 1
 				set guifontwide=Gen_Shin_Gothic_Monospace_Extra:h16
 			elseif a:mode == 2
-				set guifontwide=HanaMinA:h17
+				set guifontwide=Gen_Jyuu_Gothic_Monospace_Regular:h16
 			elseif a:mode == 3
-				set guifontwide=MingLiU:h17
+				set guifontwide=Gen_Shin_Gothic_Monospace_Regular:h16
 			endif
 		endfunction
 		function! s:ModCmdBackSlash()
