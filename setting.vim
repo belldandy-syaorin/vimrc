@@ -78,9 +78,9 @@ elseif has('win32') || has('win64')
 			elseif a:mode == 1
 				set guifontwide=Gen_Shin_Gothic_Monospace_Extra:h16
 			elseif a:mode == 2
-				set guifontwide=Gen_Jyuu_Gothic_Monospace_Regular:h16
+				set guifontwide=MingLiU:h17
 			elseif a:mode == 3
-				set guifontwide=Gen_Shin_Gothic_Monospace_Regular:h16
+				set guifontwide=
 			endif
 		endfunction
 		function! s:ModCmdBackSlash()
