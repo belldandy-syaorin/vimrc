@@ -83,18 +83,22 @@ elseif has('win32') || has('win64')
 				set guifontwide=
 			endif
 		endfunction
-		function! s:ModCmdBackSlash()
+		function! s:ModCmdlineBackSlashSpace()
 			return substitute(getcmdline(), '\\ ', ' ', 'g')
 		endfunction
-		cnoremap <A-m> <C-\>e(<SID>ModCmdBackSlash())<CR>
+		cnoremap <A-n> <C-\>e(<SID>ModCmdlineBackSlashSpace())<CR>
 	endif
 endif
 if has('gui_running')
+	call <SID>CJK_Font(0)
 	noremap! <A-h> <Left>
 	noremap! <A-l> <Right>
 	noremap! <A-j> <Down>
 	noremap! <A-k> <Up>
-	call <SID>CJK_Font(0)
+	function! s:ModCmdlineEscapeCharacter()
+		return substitute(substitute(substitute(getcmdline(), '\\', '\\\', 'g'), '\/', '\\/', 'g'), '\ ', '\\\ ', 'g')
+	endfunction
+	cnoremap <A-m> <C-\>e(<SID>ModCmdlineEscapeCharacter())<CR>
 	function! s:Highlight_From_File_Path(mode)
 		let s:highlightfromfilepath = substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g')
 		if a:mode == 0 && filereadable(s:highlightfromfilepath)
