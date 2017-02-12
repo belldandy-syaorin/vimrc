@@ -96,7 +96,7 @@ if has('gui_running')
 	noremap! <A-j> <Down>
 	noremap! <A-k> <Up>
 	function! s:ModCmdlineEscapeCharacter()
-		return substitute(substitute(substitute(getcmdline(), '\\', '\\\', 'g'), '\/', '\\/', 'g'), '\ ', '\\\ ', 'g')
+		return substitute(substitute(getcmdline(), '\\', '\\\', 'g'), '\ \|\/', '\={"\ ":"\\\ ","\/":"\\/"}[submatch(0)]', 'g')
 	endfunction
 	cnoremap <A-m> <C-\>e(<SID>ModCmdlineEscapeCharacter())<CR>
 	function! s:Highlight_From_File_Path(mode)
