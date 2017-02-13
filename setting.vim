@@ -192,46 +192,17 @@ elseif v:version >= 703
 endif
 " loadplugins
 if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
-	" jedi-vim
-		if has('python') && has('python3')
-			let g:jedi#force_py_version = 2
-		endif
-	" neocomplcache
+	" neocomplcache.vim
 		let g:neocomplcache_enable_at_startup = 1
 		if !exists('g:neocomplcache_force_omni_patterns')
 			let g:neocomplcache_force_omni_patterns = {}
 		endif
-		autocmd FileType python setlocal omnifunc=jedi#completions
-		let g:jedi#auto_vim_configuration = 0
-		let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
 	" vcscommand
 		if has('gui_running')
 			nnoremap <F2> :VCSDiff<CR>
 		endif
 	" vim-diff-enhanced
 		let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
-		function! s:EnhancedDiff_Select()
-			if !exists("s:enhanceddiff_select")
-				let s:enhanceddiff_select = 0
-			endif
-			if s:enhanceddiff_select == 0
-				let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=myers")'
-				let s:enhanceddiff_select = 1
-			elseif s:enhanceddiff_select == 1
-				let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=minimal")'
-				let s:enhanceddiff_select = 2
-			elseif s:enhanceddiff_select == 2
-				let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=patience")'
-				let s:enhanceddiff_select = 3
-			elseif s:enhanceddiff_select == 3
-				let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
-				let s:enhanceddiff_select = 0
-			endif
-			echo &diffexpr
-		endfunction
-		if has('gui_running')
-			nnoremap <S-F2> :call <SID>EnhancedDiff_Select()<CR>
-		endif
 	" vim_wm
 		if has('win32') || has('win64')
 			if !exists("g:enable_vim_wm_defaulthotkey")
