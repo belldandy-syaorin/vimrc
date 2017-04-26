@@ -203,10 +203,4 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		endif
 	" vim-diff-enhanced
 		let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
-	" vim_wm
-		if has('win32') || has('win64')
-			if !exists("g:enable_vim_wm_defaulthotkey")
-				let g:enable_vim_wm_defaulthotkey = 1
-			endif
-		endif
 endif
