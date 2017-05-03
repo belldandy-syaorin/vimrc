@@ -62,6 +62,8 @@ if has('unix')
 				set guifontwide=Noto\ Sans\ CJK\ KR\ Light\ 16
 			endif
 		endfunction
+		cnoremap <A-,> !perl -e 'print sort <>'
+		cnoremap <A-.> !python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'
 	endif
 elseif has('win32') || has('win64')
 	set clipboard=unnamed
@@ -99,8 +101,6 @@ if has('gui_running')
 		return substitute(substitute(getcmdline(), '\\', '\\\', 'g'), '\ \|\/', '\={"\ ":"\\\ ","\/":"\\/"}[submatch(0)]', 'g')
 	endfunction
 	cnoremap <A-m> <C-\>e(<SID>ModCmdlineEscapeCharacter())<CR>
-	cnoremap <A-,> !perl -e 'print sort <>'
-	cnoremap <A-.> !python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'
 	function! s:Highlight_From_File_Path(mode)
 		let s:highlightfromfilepath = substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g')
 		if a:mode == 0 && filereadable(s:highlightfromfilepath)
