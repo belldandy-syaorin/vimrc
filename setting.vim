@@ -62,8 +62,8 @@ if has('unix')
 				set guifontwide=Noto\ Sans\ CJK\ KR\ Light\ 16
 			endif
 		endfunction
-		cnoremap <A-,> !perl -e 'print sort <>'
-		cnoremap <A-.> !python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'
+		cnoremap <A-,> %!perl -e 'print sort <>'
+		cnoremap <A-.> %!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'
 	endif
 elseif has('win32') || has('win64')
 	set clipboard=unnamed
@@ -89,6 +89,8 @@ elseif has('win32') || has('win64')
 			return substitute(getcmdline(), '\\ ', ' ', 'g')
 		endfunction
 		cnoremap <A-n> <C-\>e(<SID>ModCmdlineBackSlashSpace())<CR>
+		cnoremap <A-,> %!perl -e "print sort <>"
+		cnoremap <A-.> %!python -c "import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))"
 	endif
 endif
 if has('gui_running')
