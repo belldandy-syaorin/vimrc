@@ -64,6 +64,7 @@ if has('unix')
 		endfunction
 		cnoremap <A-,> %!perl -e 'print sort <>'
 		cnoremap <A-.> %!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'
+		cnoremap <A-/> %!sort -k 2
 	endif
 elseif has('win32') || has('win64')
 	set clipboard=unnamed
