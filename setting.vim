@@ -29,7 +29,7 @@ set ignorecase
 set incsearch
 set laststatus=2
 set list
-set listchars=tab:>-,eol:<,trail:=
+set listchars=tab:>-,eol:<,trail:-
 set relativenumber
 set showcmd
 set smartcase
@@ -202,10 +202,12 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		if !exists('g:neocomplcache_force_omni_patterns')
 			let g:neocomplcache_force_omni_patterns = {}
 		endif
-	" vcscommand
-		if has('gui_running')
-			nnoremap <F2> :VCSDiff<CR>
-		endif
 	" vim-diff-enhanced
 		let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
+	if has('gui_running')
+		" nerdtree
+			nnoremap <F5> :NERDTreeToggle<CR>
+		" vcscommand
+			nnoremap <F2> :VCSDiff<CR>
+	endif
 endif
