@@ -208,6 +208,6 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		" nerdtree
 			nnoremap <F5> :NERDTreeToggle<CR>
 		" vcscommand
-			nnoremap <F2> :VCSDiff<CR>
+			nnoremap <F6> :VCSDiff<CR>
 	endif
 endif
