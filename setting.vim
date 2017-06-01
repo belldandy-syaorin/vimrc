@@ -1,6 +1,6 @@
 set nocompatible
-if filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim')) ||
- \ filereadable(expand('$VIMRUNTIME/autoload/pathogen.vim'))
+if filereadable(expand('$VIMRUNTIME/autoload/pathogen.vim')) ||
+ \ filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim'))
 	let s:use_pathogen = 1
 else
 	let s:use_pathogen = 0
@@ -43,7 +43,7 @@ set noswapfile
 set nowritebackup
 syntax enable
 autocmd InsertEnter *
-\ set cursorcolumn nocursorline number norelativenumber colorcolumn=40,80
+\ set cursorcolumn nocursorline number norelativenumber colorcolumn=40,80,120,160
 autocmd InsertLeave *
 \ set nocursorcolumn cursorline nonumber relativenumber colorcolumn=
 if has('unix')
@@ -170,23 +170,23 @@ if has('gui_running')
 	set guioptions-=e
 	set guioptions-=m
 	set guioptions-=T
-	set statusline=[%2*%t%*]%3*%m%r%h%w%y%*
+	set statusline=[%1*%t%*]
+	set statusline+=[%2*%{&fileencoding}%*(%2*%{&bomb}%*)%2*%{&fileformat}%*]
+	set statusline+=[%3*%M%R%Y%*]
 	set statusline+=%=
 	set statusline+=[%1*%{mode()}%*]
-	set statusline+=[%1*%{get(undotree(),'seq_cur')}%*/
-			\%1*%{get(undotree(),'seq_last')}%*]
-	set statusline+=[%1*%{&encoding}%*]
-	set statusline+=[%1*%{&fileencoding}%*(%1*%{&bomb}%*),%1*%{&fileformat}%*]
-	set statusline+=[%1*%l%*,%1*%c%*(%1*%p%*%%/%1*%L%*)]
+	set statusline+=[%1*%{get(undotree(),'seq_cur')}%*/%1*%{get(undotree(),'seq_last')}%*]
+	set statusline+=[%2*%{&encoding}%*]
+	set statusline+=[%3*%l%*,%3*%c%*/%3*%L%*]
 else
-	set statusline=[%t]%m%r%h%w%y
+	set statusline=[%t]
+	set statusline+=[%{&fileencoding}(%{&bomb})%{&fileformat}]
+	set statusline+=[%M%R%Y]
 	set statusline+=%=
 	set statusline+=[%{mode()}]
-	set statusline+=[%{get(undotree(),'seq_cur')}/
-			\%{get(undotree(),'seq_last')}]
+	set statusline+=[%{get(undotree(),'seq_cur')}/%{get(undotree(),'seq_last')}]
 	set statusline+=[%{&encoding}]
-	set statusline+=[%{&fileencoding}(%{&bomb}),%{&fileformat}]
-	set statusline+=[%l,%c(%p%%/%L)]
+	set statusline+=[%l,%c/%L]
 endif
 if v:version >= 800
 	set cryptmethod=blowfish2
@@ -202,12 +202,24 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		if !exists('g:neocomplcache_force_omni_patterns')
 			let g:neocomplcache_force_omni_patterns = {}
 		endif
+	" syntastic
+		let g:syntastic_always_populate_loc_list = 1
+		let g:syntastic_auto_loc_list = 1
+		let g:syntastic_check_on_open = 1
+		let g:syntastic_check_on_wq = 0
 	" vim-diff-enhanced
 		let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
 	if has('gui_running')
 		" nerdtree
 			nnoremap <F5> :NERDTreeToggle<CR>
+		" syntastic
+			set statusline+=%1*%{SyntasticStatuslineFlag()}%*
+			nnoremap <F7> :SyntasticCheck<CR>
+			nnoremap <F8> :SyntasticReset<CR>
 		" vcscommand
 			nnoremap <F6> :VCSDiff<CR>
+	else
+		" syntastic
+			set statusline+=%{SyntasticStatuslineFlag()}
 	endif
 endif
