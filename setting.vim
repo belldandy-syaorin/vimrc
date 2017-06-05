@@ -188,12 +188,8 @@ else
 	set statusline+=[%{&encoding}]
 	set statusline+=[%l,%c/%L]
 endif
-if v:version >= 800
+if v:version >= 800 || v:version >= 704
 	set cryptmethod=blowfish2
-elseif v:version >= 704 && has('patch399')
-	set cryptmethod=blowfish2
-elseif v:version >= 703
-	set cryptmethod=blowfish
 endif
 " loadplugins
 if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
