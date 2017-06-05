@@ -202,16 +202,21 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		if !exists('g:neocomplcache_force_omni_patterns')
 			let g:neocomplcache_force_omni_patterns = {}
 		endif
+	" signify
+		let g:signify_disable_by_default = 1
+		let g:signify_line_highlight = 1
+		let g:signify_vcs_list = [ 'git', 'hg' ]
 	" syntastic
 		let g:syntastic_always_populate_loc_list = 1
 		let g:syntastic_auto_loc_list = 1
-		let g:syntastic_check_on_open = 1
 		let g:syntastic_check_on_wq = 0
 	" vim-diff-enhanced
 		let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
 	if has('gui_running')
 		" nerdtree
-			nnoremap <F5> :NERDTreeToggle<CR>
+			nnoremap <F9> :NERDTreeToggle<CR>
+		" signify
+			nnoremap <F5> :SignifyToggle<CR>
 		" syntastic
 			set statusline+=%1*%{SyntasticStatuslineFlag()}%*
 			nnoremap <F7> :SyntasticCheck<CR>
