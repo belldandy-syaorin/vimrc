@@ -188,7 +188,9 @@ else
 	set statusline+=[%{&encoding}]
 	set statusline+=[%l,%c/%L]
 endif
-if v:version >= 800 || v:version >= 704
+if v:version >= 800
+	set cryptmethod=blowfish2
+elseif v:version >= 704 && has('patch401')
 	set cryptmethod=blowfish2
 endif
 " loadplugins
@@ -207,7 +209,7 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		let g:syntastic_auto_loc_list = 1
 		let g:syntastic_check_on_wq = 0
 	" vim-diff-enhanced
-		let &diffexpr='EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
+		let &diffexpr = 'EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
 	if has('gui_running')
 		" nerdtree
 			nnoremap <F9> :NERDTreeToggle<CR>
