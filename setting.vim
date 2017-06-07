@@ -21,7 +21,6 @@ set cursorline
 set diffopt=filler,horizontal
 set encoding=utf-8
 set fileencoding=utf-8
-set fileencodings=utf-8,ucs-bom,ucs-2le,taiwan,prc,japan,korea
 set foldcolumn=1
 set foldmethod=indent
 set hlsearch
@@ -36,9 +35,6 @@ set smartcase
 set smartindent
 set splitbelow
 set splitright
-set wrap
-set nobackup
-set nocursorcolumn
 set noswapfile
 set nowritebackup
 syntax enable
@@ -48,7 +44,6 @@ autocmd InsertLeave *
 \ set nocursorcolumn cursorline nonumber relativenumber colorcolumn=
 if has('unix')
 	set clipboard=unnamedplus
-	set fileformats=unix,dos
 	if has('gui_running')
 		set guifont=Source\ Code\ Pro\ Light\ 14
 		function! s:CJK_Font(mode)
@@ -68,7 +63,6 @@ if has('unix')
 	endif
 elseif has('win32') || has('win64')
 	set clipboard=unnamed
-	set fileformats=dos,unix
 	set shellcmdflag=/u/c
 	if has('gui_running')
 		autocmd GUIEnter * winpos 0 0
