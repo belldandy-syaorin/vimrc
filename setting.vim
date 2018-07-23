@@ -194,6 +194,8 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		if !exists('g:neocomplcache_force_omni_patterns')
 			let g:neocomplcache_force_omni_patterns = {}
 		endif
+	" nerdtree
+		let NERDTreeQuitOnOpen = 1
 	" signify
 		let g:signify_disable_by_default = 1
 		let g:signify_line_highlight = 1
