@@ -189,11 +189,8 @@ elseif v:version >= 704 && has('patch401')
 endif
 " loadplugins
 if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
-	" neocomplcache.vim
-		let g:neocomplcache_enable_at_startup = 1
-		if !exists('g:neocomplcache_force_omni_patterns')
-			let g:neocomplcache_force_omni_patterns = {}
-		endif
+	" neocomplete.vim
+		let g:neocomplete#enable_at_startup = 1
 	" nerdtree
 		let NERDTreeQuitOnOpen = 1
 	" signify
@@ -207,6 +204,8 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 	" vim-diff-enhanced
 		let &diffexpr = 'EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
 	if has('gui_running')
+		" ctrlp.vim
+			nnoremap <F10> :CtrlPBuffer<CR>
 		" nerdtree
 			nnoremap <F9> :NERDTreeToggle<CR>
 		" signify
