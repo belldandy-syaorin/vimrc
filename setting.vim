@@ -189,8 +189,11 @@ elseif v:version >= 704 && has('patch401')
 endif
 " loadplugins
 if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
+	" ctrlp.vim
+		let g:ctrlp_types = ['buf', 'mru', 'fil']
 	" neocomplete.vim
 		let g:neocomplete#enable_at_startup = 1
+		let g:neocomplete#enable_smart_case = 1
 	" nerdtree
 		let NERDTreeQuitOnOpen = 1
 	" signify
@@ -205,15 +208,15 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		let &diffexpr = 'EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
 	if has('gui_running')
 		" ctrlp.vim
-			nnoremap <F10> :CtrlPBuffer<CR>
+			nnoremap <F8> :CtrlPBuffer<CR>
 		" nerdtree
-			nnoremap <F9> :NERDTreeToggle<CR>
+			nnoremap <F7> :NERDTreeToggle<CR>
 		" signify
 			nnoremap <F5> :SignifyToggle<CR>
 		" syntastic
 			set statusline+=%1*%{SyntasticStatuslineFlag()}%*
-			nnoremap <F7> :SyntasticCheck<CR>
-			nnoremap <F8> :SyntasticReset<CR>
+			nnoremap <F9> :SyntasticCheck<CR>
+			nnoremap <F10> :SyntasticReset<CR>
 		" vcscommand
 			nnoremap <F6> :VCSDiff<CR>
 	else
