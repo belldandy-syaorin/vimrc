@@ -57,9 +57,9 @@ if has('unix')
 				set guifontwide=Noto\ Sans\ CJK\ KR\ Light\ 16
 			endif
 		endfunction
-		cnoremap <A-,> %!perl -e 'print sort <>'
-		cnoremap <A-.> %!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'
-		cnoremap <A-/> %!sort -k 2
+		cmap <A-,> %!perl -e 'print sort <>'
+		cmap <A-.> %!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'
+		cmap <A-/> %!sort -k 2
 	endif
 elseif has('win32') || has('win64')
 	set clipboard=unnamed
@@ -80,24 +80,12 @@ elseif has('win32') || has('win64')
 				set guifontwide=
 			endif
 		endfunction
-		function! s:ModCmdlineBackSlashSpace()
-			return substitute(getcmdline(), '\\ ', ' ', 'g')
-		endfunction
-		cnoremap <A-n> <C-\>e(<SID>ModCmdlineBackSlashSpace())<CR>
-		cnoremap <A-,> %!perl -e "print sort <>"
-		cnoremap <A-.> %!python -c "import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))"
+		cmap <A-,> %!perl -e "print sort <>"
+		cmap <A-.> %!python -c "import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))"
 	endif
 endif
 if has('gui_running')
 	call <SID>CJK_Font(0)
-	noremap! <A-h> <Left>
-	noremap! <A-l> <Right>
-	noremap! <A-j> <Down>
-	noremap! <A-k> <Up>
-	function! s:ModCmdlineEscapeCharacter()
-		return substitute(substitute(getcmdline(), '\\', '\\\', 'g'), '\ \|\/', '\={"\ ":"\\\ ","\/":"\\/"}[submatch(0)]', 'g')
-	endfunction
-	cnoremap <A-m> <C-\>e(<SID>ModCmdlineEscapeCharacter())<CR>
 	function! s:Highlight_From_File_Path(mode)
 		let s:highlightfromfilepath = substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g')
 		if a:mode == 0 && filereadable(s:highlightfromfilepath)
@@ -137,7 +125,7 @@ if has('gui_running')
 			let g:highlight_file_path_advanced = 0
 		endif
 	endfunction
-	nnoremap <F3> :call <SID>Highlight_From_File_Path_Select()<CR>
+	nmap <F3> :call <SID>Highlight_From_File_Path_Select()<CR>
 	function! s:CJK_Font_Select()
 		if !exists("s:cjk_font_select")
 			let s:cjk_font_select = 1
@@ -156,7 +144,7 @@ if has('gui_running')
 			let s:cjk_font_select = 0
 		endif
 	endfunction
-	nnoremap <F4> :call <SID>CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
+	nmap <F4> :call <SID>CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
 	highlight Normal guibg=black guifg=white
 	highlight User1 guibg=white guifg=red
 	highlight User2 guibg=white guifg=green
@@ -182,6 +170,10 @@ else
 	set statusline+=[%{&encoding}]
 	set statusline+=[%l,%c/%L]
 endif
+map! <A-h> <Left>
+map! <A-l> <Right>
+map! <A-j> <Down>
+map! <A-k> <Up>
 if v:version >= 800
 	set cryptmethod=blowfish2
 elseif v:version >= 704 && has('patch401')
@@ -200,6 +192,10 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		let g:signify_disable_by_default = 1
 		let g:signify_line_highlight = 1
 		let g:signify_vcs_list = [ 'git', 'hg' ]
+		nmap <expr> <A-h> &diff ? "gg]c[c" : "gg<A-j><A-k>"
+		nmap <expr> <A-l> &diff ? "G[c]c" : "G<A-k><A-j>"
+		nmap <expr> <A-j> &diff ? "]c" : "<Plug>(signify-next-hunk)"
+		nmap <expr> <A-k> &diff ? "[c" : "<Plug>(signify-prev-hunk)"
 	" syntastic
 		let g:syntastic_always_populate_loc_list = 1
 		let g:syntastic_auto_loc_list = 1
@@ -207,18 +203,16 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 	" vim-diff-enhanced
 		let &diffexpr = 'EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
 	if has('gui_running')
-		" ctrlp.vim
-			nnoremap <F8> :CtrlPBuffer<CR>
 		" nerdtree
-			nnoremap <F7> :NERDTreeToggle<CR>
+			nmap <F7> :NERDTreeToggle<CR>
 		" signify
-			nnoremap <F5> :SignifyToggle<CR>
+			nmap <F5> :SignifyToggle<CR>
 		" syntastic
 			set statusline+=%1*%{SyntasticStatuslineFlag()}%*
-			nnoremap <F9> :SyntasticCheck<CR>
-			nnoremap <F10> :SyntasticReset<CR>
+			nmap <F9> :SyntasticCheck<CR>
+			nmap <F10> :SyntasticReset<CR>
 		" vcscommand
-			nnoremap <F6> :VCSDiff<CR>
+			nmap <F6> :VCSDiff<CR>
 	else
 		" syntastic
 			set statusline+=%{SyntasticStatuslineFlag()}
