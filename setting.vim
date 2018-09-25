@@ -57,9 +57,9 @@ if has('unix')
 				set guifontwide=Noto\ Sans\ CJK\ KR\ Light\ 16
 			endif
 		endfunction
-		cmap <A-,> %!perl -e 'print sort <>'
-		cmap <A-.> %!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'
-		cmap <A-/> %!sort -k 2
+		nmap <A-,> :%!perl -e 'print sort <>'<CR>:echo 'sort(perl)'<CR>
+		nmap <A-.> :%!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'<CR>:echo 'sort(python)'<CR>
+		nmap <A-/> :%!sort -k 2<CR>:echo 'sort -k 2'<CR>
 	endif
 elseif has('win32') || has('win64')
 	set clipboard=unnamed
@@ -80,8 +80,8 @@ elseif has('win32') || has('win64')
 				set guifontwide=
 			endif
 		endfunction
-		cmap <A-,> %!perl -e "print sort <>"
-		cmap <A-.> %!python -c "import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))"
+		nmap <A-,> :%!perl -e "print sort <>"<CR>:echo "sort(perl)"<CR>
+		nmap <A-.> :%!python -c "import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))"<CR>:echo "sort(python)"<CR>
 	endif
 endif
 if has('gui_running')
@@ -188,33 +188,43 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		let g:neocomplete#enable_smart_case = 1
 	" nerdtree
 		let NERDTreeQuitOnOpen = 1
-	" signify
-		let g:signify_disable_by_default = 1
-		let g:signify_line_highlight = 1
-		let g:signify_vcs_list = [ 'git', 'hg' ]
-		nmap <expr> <A-h> &diff ? "gg]c[c" : "gg<A-j><A-k>"
-		nmap <expr> <A-l> &diff ? "G[c]c" : "G<A-k><A-j>"
-		nmap <expr> <A-j> &diff ? "]c" : "<Plug>(signify-next-hunk)"
-		nmap <expr> <A-k> &diff ? "[c" : "<Plug>(signify-prev-hunk)"
 	" syntastic
 		let g:syntastic_always_populate_loc_list = 1
 		let g:syntastic_auto_loc_list = 1
 		let g:syntastic_check_on_wq = 0
 	" vim-diff-enhanced
 		let &diffexpr = 'EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
+	" vim-searchindex
+		nmap n nzz<Plug>SearchIndex
+		nmap N Nzz<Plug>SearchIndex
+	" vim-signify
+		let g:signify_disable_by_default = 1
+		let g:signify_line_highlight = 1
+		let g:signify_vcs_list = [ 'git', 'hg' ]
+		nmap <expr> <A-h> &diff ? "gg]c[c" : "gg<Plug>(signify-next-hunk)<Plug>(signify-prev-hunk)"
+		nmap <expr> <A-l> &diff ? "G[c]c" : "G<Plug>(signify-prev-hunk)<Plug>(signify-next-hunk)"
+		nmap <expr> <A-j> &diff ? "]czz" : "<Plug>(signify-next-hunk)zz"
+		nmap <expr> <A-k> &diff ? "[czz" : "<Plug>(signify-prev-hunk)zz"
 	if has('gui_running')
 		" nerdtree
 			nmap <F7> :NERDTreeToggle<CR>
-		" signify
-			nmap <F5> :SignifyToggle<CR>
 		" syntastic
 			set statusline+=%1*%{SyntasticStatuslineFlag()}%*
 			nmap <F9> :SyntasticCheck<CR>
 			nmap <F10> :SyntasticReset<CR>
 		" vcscommand
 			nmap <F6> :VCSDiff<CR>
+		" vim-signify
+			nmap <F5> :SignifyToggle<CR>
 	else
 		" syntastic
 			set statusline+=%{SyntasticStatuslineFlag()}
 	endif
+else
+	nmap n nzz
+	nmap N Nzz
+	nmap <A-h> gg]c[c
+	nmap <A-l> G[c]c
+	nmap <A-j> ]czz
+	nmap <A-k> [czz
 endif
