@@ -1,4 +1,7 @@
+" vi
 set nocompatible
+
+" vim-pathogen
 if filereadable(expand('$VIMRUNTIME/autoload/pathogen.vim')) ||
  \ filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim'))
 	let s:use_pathogen = 1
@@ -13,6 +16,8 @@ endif
 if s:use_pathogen == 1 && s:use_root == 0
 	execute pathogen#infect()
 endif
+
+" vim
 set ambiwidth=double
 set autoindent
 set autoread
@@ -46,20 +51,6 @@ if has('unix')
 	set clipboard=unnamedplus
 	if has('gui_running')
 		set guifont=Source\ Code\ Pro\ Light\ 14
-		function! s:CJK_Font(mode)
-			if a:mode == 0
-				set guifontwide=Noto\ Sans\ CJK\ TW\ Light\ 16
-			elseif a:mode == 1
-				set guifontwide=Noto\ Sans\ CJK\ CN\ Light\ 16
-			elseif a:mode == 2
-				set guifontwide=Noto\ Sans\ CJK\ JP\ Light\ 16
-			elseif a:mode == 3
-				set guifontwide=Noto\ Sans\ CJK\ KR\ Light\ 16
-			endif
-		endfunction
-		nmap <A-,> :%!perl -e 'print sort <>'<CR>:echo 'sort(perl)'<CR>
-		nmap <A-.> :%!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'<CR>:echo 'sort(python)'<CR>
-		nmap <A-/> :%!sort -k 2<CR>:echo 'sort -k 2'<CR>
 	endif
 elseif has('win32') || has('win64')
 	set clipboard=unnamed
@@ -69,82 +60,18 @@ elseif has('win32') || has('win64')
 		autocmd InsertEnter * set noimdisable
 		autocmd InsertLeave * set imdisable
 		set guifont=Source_Code_Pro_Light:h14
-		function! s:CJK_Font(mode)
-			if a:mode == 0
-				set guifontwide=MingLiU:h17
-			elseif a:mode == 1
-				set guifontwide=
-			elseif a:mode == 2
-				set guifontwide=
-			elseif a:mode == 3
-				set guifontwide=
-			endif
-		endfunction
-		nmap <A-,> :%!perl -e "print sort <>"<CR>:echo "sort(perl)"<CR>
-		nmap <A-.> :%!python -c "import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))"<CR>:echo "sort(python)"<CR>
 	endif
 endif
+if v:version >= 800
+	set cryptmethod=blowfish2
+elseif v:version >= 704 && has('patch401')
+	set cryptmethod=blowfish2
+endif
 if has('gui_running')
-	call <SID>CJK_Font(0)
-	function! s:Highlight_From_File_Path(mode)
-		let s:highlightfromfilepath = substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g')
-		if a:mode == 0 && filereadable(s:highlightfromfilepath)
-			syntax clear
-			echo 'Highlight From File Path = Disable'
-		elseif a:mode == 1 && filereadable(s:highlightfromfilepath)
-			if has('unix')
-				let s:highlightfromfilepath = substitute(substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g'), '\ ', '\\\ ', 'g')
-				execute 'source ' s:highlightfromfilepath
-			elseif has('win32') || has('win64')
-				execute 'source ' s:highlightfromfilepath
-			endif
-			if g:highlight_file_path_advanced == 0
-				echo 'Highlight From File Path = Enable'
-			elseif g:highlight_file_path_advanced == 1
-				echo 'Highlight From File Path = Enable (Advanced)'
-			endif
-		else
-			echo 'Highlight From File Path = n/a'
-		endif
-	endfunction
-	function! s:Highlight_From_File_Path_Select()
-		if !exists("s:highlight_file_path_select") && !exists("g:highlight_file_path_advanced")
-			let s:highlight_file_path_select = 1
-			let g:highlight_file_path_advanced = 0
-		endif
-		if s:highlight_file_path_select == 0
-			call <SID>Highlight_From_File_Path(0)
-			let s:highlight_file_path_select = 1
-		elseif s:highlight_file_path_select == 1
-			call <SID>Highlight_From_File_Path(1)
-			let s:highlight_file_path_select = 2
-			let g:highlight_file_path_advanced = 1
-		elseif s:highlight_file_path_select == 2
-			call <SID>Highlight_From_File_Path(1)
-			let s:highlight_file_path_select = 0
-			let g:highlight_file_path_advanced = 0
-		endif
-	endfunction
-	nmap <F3> :call <SID>Highlight_From_File_Path_Select()<CR>
-	function! s:CJK_Font_Select()
-		if !exists("s:cjk_font_select")
-			let s:cjk_font_select = 1
-		endif
-		if s:cjk_font_select == 0
-			call <SID>CJK_Font(0)
-			let s:cjk_font_select = 1
-		elseif s:cjk_font_select == 1
-			call <SID>CJK_Font(1)
-			let s:cjk_font_select = 2
-		elseif s:cjk_font_select == 2
-			call <SID>CJK_Font(2)
-			let s:cjk_font_select = 3
-		elseif s:cjk_font_select == 3
-			call <SID>CJK_Font(3)
-			let s:cjk_font_select = 0
-		endif
-	endfunction
-	nmap <F4> :call <SID>CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
+	map! <A-h> <Left>
+	map! <A-l> <Right>
+	map! <A-j> <Down>
+	map! <A-k> <Up>
 	highlight Normal guibg=black guifg=white
 	highlight User1 guibg=white guifg=red
 	highlight User2 guibg=white guifg=green
@@ -170,15 +97,114 @@ else
 	set statusline+=[%{&encoding}]
 	set statusline+=[%l,%c/%L]
 endif
-map! <A-h> <Left>
-map! <A-l> <Right>
-map! <A-j> <Down>
-map! <A-k> <Up>
-if v:version >= 800
-	set cryptmethod=blowfish2
-elseif v:version >= 704 && has('patch401')
-	set cryptmethod=blowfish2
+
+" CJK_Font
+if has('gui_running')
+	if has('unix')
+		function! s:CJK_Font(mode)
+			if a:mode == 0
+				set guifontwide=Noto\ Sans\ CJK\ TW\ Light\ 16
+			elseif a:mode == 1
+				set guifontwide=Noto\ Sans\ CJK\ CN\ Light\ 16
+			elseif a:mode == 2
+				set guifontwide=Noto\ Sans\ CJK\ JP\ Light\ 16
+			elseif a:mode == 3
+				set guifontwide=Noto\ Sans\ CJK\ KR\ Light\ 16
+			endif
+		endfunction
+	elseif has('win32') || has('win64')
+		function! s:CJK_Font(mode)
+			if a:mode == 0
+				set guifontwide=MingLiU:h17
+			elseif a:mode == 1
+				set guifontwide=
+			elseif a:mode == 2
+				set guifontwide=
+			elseif a:mode == 3
+				set guifontwide=
+			endif
+		endfunction
+	endif
+	function! s:CJK_Font_Select()
+		if !exists("s:cjk_font_select")
+			let s:cjk_font_select = 1
+		endif
+		if s:cjk_font_select == 0
+			call <SID>CJK_Font(0)
+			let s:cjk_font_select = 1
+		elseif s:cjk_font_select == 1
+			call <SID>CJK_Font(1)
+			let s:cjk_font_select = 2
+		elseif s:cjk_font_select == 2
+			call <SID>CJK_Font(2)
+			let s:cjk_font_select = 3
+		elseif s:cjk_font_select == 3
+			call <SID>CJK_Font(3)
+			let s:cjk_font_select = 0
+		endif
+	endfunction
+	call <SID>CJK_Font(0)
 endif
+
+" Highlight_From_File_Path
+	function! s:Highlight_From_File_Path(mode)
+		if has('unix')
+			let s:highlightfromfilepath = substitute(substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g'), '\ ', '\\\ ', 'g')
+		elseif has('win32') || has('win64')
+			let s:highlightfromfilepath = substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g')
+		endif
+		if a:mode == 0 && filereadable(s:highlightfromfilepath)
+			syntax clear
+			echo 'Highlight From File Path = Disable'
+		elseif a:mode == 1 && filereadable(s:highlightfromfilepath)
+			syntax clear
+			execute 'source ' s:highlightfromfilepath
+			if g:highlight_file_path_group == 0
+				echo 'Highlight From File Path = Enable (group0)'
+			elseif g:highlight_file_path_group == 1
+				echo 'Highlight From File Path = Enable (group0+1)'
+			elseif g:highlight_file_path_group == 2
+				echo 'Highlight From File Path = Enable (group0+2)'
+			endif
+		else
+			echo 'Highlight From File Path = n/a'
+		endif
+	endfunction
+	function! s:Highlight_From_File_Path_Select()
+		if !exists("s:highlight_file_path_select") && !exists("g:highlight_file_path_group")
+			let s:highlight_file_path_select = 1
+			let g:highlight_file_path_group = 0
+		endif
+		if s:highlight_file_path_select == 0
+			call <SID>Highlight_From_File_Path(0)
+			let s:highlight_file_path_select = 1
+		elseif s:highlight_file_path_select == 1
+			call <SID>Highlight_From_File_Path(1)
+			let s:highlight_file_path_select = 2
+			let g:highlight_file_path_group = 1
+		elseif s:highlight_file_path_select == 2
+			call <SID>Highlight_From_File_Path(1)
+			let s:highlight_file_path_select = 3
+			let g:highlight_file_path_group = 2
+		elseif s:highlight_file_path_select == 3
+			call <SID>Highlight_From_File_Path(1)
+			let s:highlight_file_path_select = 0
+			let g:highlight_file_path_group = 0
+		endif
+	endfunction
+
+" sort
+if has('gui_running')
+	if has('unix')
+		nmap <A-,> :%!perl -e 'print sort <>'<CR>:echo 'sort(perl)'<CR>
+		nmap <A-.> :%!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'<CR>:echo 'sort(python)'<CR>
+		nmap <A-/> :%!sort -k 2<CR>:echo 'sort -k 2'<CR>
+	elseif has('win32') || has('win64')
+		nmap <A-,> :%!perl -e "print sort <>"<CR>:echo "sort(perl)"<CR>
+		nmap <A-.> :%!python -c "import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))"<CR>:echo "sort(python)"<CR>
+	endif
+endif
+
 " loadplugins
 if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 	" ctrlp.vim
@@ -206,6 +232,10 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		nmap <expr> <A-j> &diff ? "]czz" : "<Plug>(signify-next-hunk)zz"
 		nmap <expr> <A-k> &diff ? "[czz" : "<Plug>(signify-prev-hunk)zz"
 	if has('gui_running')
+		" CJK_Font
+			nmap <F4> :call <SID>CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
+		" Highlight_From_File_Path
+			nmap <F3> :call <SID>Highlight_From_File_Path_Select()<CR>
 		" nerdtree
 			nmap <F7> :NERDTreeToggle<CR>
 		" syntastic
