@@ -72,6 +72,8 @@ if has('gui_running')
 	map! <A-l> <Right>
 	map! <A-j> <Down>
 	map! <A-k> <Up>
+	nmap <expr> <A-d> &diff ? ":diffoff<CR>" : ":diffthis<CR>"
+	nmap <A-w> :set wrap!<CR>
 	highlight Normal guibg=black guifg=white
 	highlight User1 guibg=white guifg=red
 	highlight User2 guibg=white guifg=green
@@ -160,11 +162,11 @@ endif
 			syntax clear
 			execute 'source ' s:highlightfromfilepath
 			if g:highlight_file_path_group == 0
-				echo 'Highlight From File Path = Enable (group0)'
+				echo 'Highlight From File Path = Enable (group 0)'
 			elseif g:highlight_file_path_group == 1
-				echo 'Highlight From File Path = Enable (group0+1)'
+				echo 'Highlight From File Path = Enable (group 0+1)'
 			elseif g:highlight_file_path_group == 2
-				echo 'Highlight From File Path = Enable (group0+2)'
+				echo 'Highlight From File Path = Enable (group 0+2)'
 			endif
 		else
 			echo 'Highlight From File Path = n/a'
@@ -196,12 +198,12 @@ endif
 " sort
 if has('gui_running')
 	if has('unix')
-		nmap <A-,> :%!perl -e 'print sort <>'<CR>:echo 'sort(perl)'<CR>
-		nmap <A-.> :%!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'<CR>:echo 'sort(python)'<CR>
-		nmap <A-/> :%!sort -k 2<CR>:echo 'sort -k 2'<CR>
+		nmap <A-,> :%!perl -e 'print sort <>'<CR>:echo 'sort (perl)'<CR>
+		nmap <A-.> :%!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'<CR>:echo 'sort (python)'<CR>
+		nmap <A-/> :%!sort -k 2<CR>:echo 'sort (sort -k 2)'<CR>
 	elseif has('win32') || has('win64')
-		nmap <A-,> :%!perl -e "print sort <>"<CR>:echo "sort(perl)"<CR>
-		nmap <A-.> :%!python -c "import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))"<CR>:echo "sort(python)"<CR>
+		nmap <A-,> :%!perl -e "print sort <>"<CR>:echo "sort (perl)"<CR>
+		nmap <A-.> :%!python -c "import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))"<CR>:echo "sort (python)"<CR>
 	endif
 endif
 
