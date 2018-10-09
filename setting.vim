@@ -73,6 +73,8 @@ if has('gui_running')
 	map! <A-j> <Down>
 	map! <A-k> <Up>
 	nmap <expr> <A-d> &diff ? ":diffoff<CR>" : ":diffthis<CR>"
+	nmap <A-e> <C-w>=
+	nmap <A-m> <C-w>_
 	nmap <A-w> :set wrap!<CR>
 	highlight Normal guibg=black guifg=white
 	highlight User1 guibg=white guifg=red
