@@ -147,7 +147,7 @@ if has('gui_running')
 			let s:cjk_font_select = 0
 		endif
 	endfunction
-	nmap <F4> :call <SID>CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
+	nmap <A-f> :call <SID>CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
 	call <SID>CJK_Font(0)
 endif
 
@@ -197,7 +197,7 @@ endif
 			let g:highlight_file_path_group = 0
 		endif
 	endfunction
-	nmap <F3> :call <SID>Highlight_From_File_Path_Select()<CR>
+	nmap <A-g> :call <SID>Highlight_From_File_Path_Select()<CR>
 
 " sort
 if has('gui_running')
@@ -239,15 +239,15 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		nmap <expr> <A-k> &diff ? "[czz" : "<Plug>(signify-prev-hunk)zz"
 	if has('gui_running')
 		" nerdtree
-			nmap <F7> :NERDTreeToggle<CR>
+			nmap <A-n> :NERDTreeToggle<CR>
 		" syntastic
 			set statusline+=%1*%{SyntasticStatuslineFlag()}%*
-			nmap <F9> :SyntasticCheck<CR>
-			nmap <F10> :SyntasticReset<CR>
+			nmap <A-c> :SyntasticCheck<CR>
+			nmap <A-r> :SyntasticReset<CR>
 		" vcscommand
-			nmap <F6> :VCSDiff<CR>
+			nmap <A-v> :VCSDiff<CR>
 		" vim-signify
-			nmap <expr> <F5> &diff ? ":diffoff<CR>" : ":SignifyToggle<CR>"
+			nmap <expr> <A-s> &diff ? ":diffoff<CR>" : ":SignifyToggle<CR>"
 	else
 		" syntastic
 			set statusline+=%{SyntasticStatuslineFlag()}
