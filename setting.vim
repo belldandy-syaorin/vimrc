@@ -121,11 +121,11 @@ if has('gui_running')
 			if a:mode == 0
 				set guifontwide=MingLiU:h17
 			elseif a:mode == 1
-				set guifontwide=
+				set guifontwide=MingLiU:h16
 			elseif a:mode == 2
-				set guifontwide=
+				set guifontwide=MingLiU:h15
 			elseif a:mode == 3
-				set guifontwide=
+				set guifontwide=MingLiU:h14
 			endif
 		endfunction
 	endif
