@@ -83,23 +83,25 @@ if has('gui_running')
 	set guioptions-=e
 	set guioptions-=m
 	set guioptions-=T
-	set statusline=[%1*%t%*]
+	set statusline=[%1*%t%*@%1*%{bufnr('%')}%*]
 	set statusline+=[%2*%{&fileencoding}%*(%2*%{&bomb}%*)%2*%{&fileformat}%*]
 	set statusline+=[%3*%M%R%Y%*]
 	set statusline+=%=
 	set statusline+=[%1*%{mode()}%*]
+	set statusline+=[%1*%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}%*]
 	set statusline+=[%1*%{get(undotree(),'seq_cur')}%*/%1*%{get(undotree(),'seq_last')}%*]
 	set statusline+=[%2*%{&encoding}%*]
-	set statusline+=[%3*%l%*,%3*%c%*/%3*%L%*]
+	set statusline+=[%3*%l%*,%3*%c%*@%3*%L%*]
 else
-	set statusline=[%t]
+	set statusline=[%t@%{bufnr('%')}]
 	set statusline+=[%{&fileencoding}(%{&bomb})%{&fileformat}]
 	set statusline+=[%M%R%Y]
 	set statusline+=%=
 	set statusline+=[%{mode()}]
+	set statusline+=[%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]
 	set statusline+=[%{get(undotree(),'seq_cur')}/%{get(undotree(),'seq_last')}]
 	set statusline+=[%{&encoding}]
-	set statusline+=[%l,%c/%L]
+	set statusline+=[%l,%c@%L]
 endif
 
 " CJK_Font
