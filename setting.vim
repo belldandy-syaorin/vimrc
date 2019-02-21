@@ -22,7 +22,6 @@ set ambiwidth=double
 set autoindent
 set autoread
 set backspace=indent,eol,start
-set cursorline
 set diffopt=filler,horizontal
 set encoding=utf-8
 set fileencoding=utf-8
@@ -44,9 +43,9 @@ set noswapfile
 set nowritebackup
 syntax enable
 autocmd InsertEnter *
-\ set cursorcolumn nocursorline number norelativenumber colorcolumn=40,80,120,160
+\ set cursorcolumn cursorline number norelativenumber colorcolumn=40,80,120,160
 autocmd InsertLeave *
-\ set nocursorcolumn cursorline nonumber relativenumber colorcolumn=
+\ set nocursorcolumn nocursorline nonumber relativenumber colorcolumn=
 if has('unix')
 	set clipboard=unnamedplus
 	if has('gui_running')
