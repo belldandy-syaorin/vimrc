@@ -92,6 +92,7 @@ if has('gui_running')
 	set statusline+=[%1*%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}%*]
 	set statusline+=[%1*%{get(undotree(),'seq_cur')}%*/%1*%{get(undotree(),'seq_last')}%*]
 	set statusline+=[%2*%{&encoding}%*]
+	set statusline+=[%2*%B%*]
 	set statusline+=[%3*%l%*,%3*%c%*@%3*%L%*]
 else
 	set statusline=[%t@%{bufnr('%')}]
@@ -102,6 +103,7 @@ else
 	set statusline+=[%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}]
 	set statusline+=[%{get(undotree(),'seq_cur')}/%{get(undotree(),'seq_last')}]
 	set statusline+=[%{&encoding}]
+	set statusline+=[%B]
 	set statusline+=[%l,%c@%L]
 endif
 
@@ -208,9 +210,14 @@ if has('gui_running')
 		nmap <A-,> :%!perl -e 'print sort <>'<CR>:echo 'sort (perl)'<CR>
 		nmap <A-.> :%!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'<CR>:echo 'sort (python)'<CR>
 		nmap <A-/> :%!sort -k 2<CR>:echo 'sort (sort -k 2)'<CR>
+		nmap <A-<> :%!perl -e 'print reverse <>'<CR>:echo 'sort reverse (perl)'<CR>
+		nmap <A->> :%!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines(), reverse=True))'<CR>:echo 'sort reverse (python)'<CR>
+		nmap <A-?> :%!sort -k 2 -r<CR>:echo 'sort reverse (sort -k 2 -r)'<CR>
 	elseif has('win32') || has('win64')
 		nmap <A-,> :%!perl -e "print sort <>"<CR>:echo "sort (perl)"<CR>
 		nmap <A-.> :%!python -c "import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))"<CR>:echo "sort (python)"<CR>
+		nmap <A-<> :%!perl -e "print reverse <>"<CR>:echo "sort reverse (perl)"<CR>
+		nmap <A->> :%!python -c "import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines(), reverse=True))"<CR>:echo "sort reverse (python)"<CR>
 	endif
 endif
 
