@@ -67,8 +67,6 @@ elseif v:version >= 704 && has('patch401')
 	set cryptmethod=blowfish2
 endif
 if has('gui_running')
-	nmap { {zt
-	nmap } }zb
 	map! <A-h> <Left>
 	map! <A-l> <Right>
 	map! <A-j> <Down>
