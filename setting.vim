@@ -3,7 +3,7 @@ set nocompatible
 
 " vim-pathogen
 if filereadable(expand('$VIMRUNTIME/autoload/pathogen.vim')) ||
- \ filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim'))
+	\ filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim'))
 	let s:use_pathogen = 1
 else
 	let s:use_pathogen = 0
@@ -43,22 +43,23 @@ set noswapfile
 set nowritebackup
 syntax enable
 autocmd InsertEnter *
-\ set cursorcolumn cursorline number norelativenumber colorcolumn=40,80,120,160
+	\ set cursorcolumn cursorline number norelativenumber colorcolumn=40,80,120,160
 autocmd InsertLeave *
-\ set nocursorcolumn nocursorline nonumber relativenumber colorcolumn=
+	\ set nocursorcolumn nocursorline nonumber relativenumber colorcolumn=
 if has('unix')
 	set clipboard=unnamedplus
 	if has('gui_running')
-		set guifont=Source\ Code\ Pro\ Light\ 14
+		set guifont=Source\ Code\ Pro\ Light\ 13.5
 	endif
-elseif has('win32') || has('win64')
+elseif has('win64')
 	set clipboard=unnamed
 	set shellcmdflag=/u/c
 	if has('gui_running')
 		autocmd GUIEnter * winpos 0 0
 		autocmd InsertEnter * set noimdisable
 		autocmd InsertLeave * set imdisable
-		set guifont=Source_Code_Pro_Light:h14
+		set guifont=Source_Code_Pro_Light:h13.5
+		set guifontwide=MingLiU:h17
 	endif
 endif
 if v:version >= 800
@@ -106,32 +107,18 @@ else
 endif
 
 " CJK_Font
-if has('gui_running')
-	if has('unix')
-		function! s:CJK_Font(mode)
-			if a:mode == 0
-				set guifontwide=Noto\ Sans\ CJK\ TW\ Light\ 16
-			elseif a:mode == 1
-				set guifontwide=Noto\ Sans\ CJK\ CN\ Light\ 16
-			elseif a:mode == 2
-				set guifontwide=Noto\ Sans\ CJK\ JP\ Light\ 16
-			elseif a:mode == 3
-				set guifontwide=Noto\ Sans\ CJK\ KR\ Light\ 16
-			endif
-		endfunction
-	elseif has('win32') || has('win64')
-		function! s:CJK_Font(mode)
-			if a:mode == 0
-				set guifontwide=MingLiU:h17
-			elseif a:mode == 1
-				set guifontwide=MingLiU:h16
-			elseif a:mode == 2
-				set guifontwide=MingLiU:h15
-			elseif a:mode == 3
-				set guifontwide=MingLiU:h14
-			endif
-		endfunction
-	endif
+if has('gui_running') && has('unix')
+	function! s:CJK_Font(mode)
+		if a:mode == 0
+			set guifontwide=Noto\ Sans\ CJK\ TW\ Light\ 16
+		elseif a:mode == 1
+			set guifontwide=Noto\ Sans\ CJK\ CN\ Light\ 16
+		elseif a:mode == 2
+			set guifontwide=Noto\ Sans\ CJK\ JP\ Light\ 16
+		elseif a:mode == 3
+			set guifontwide=Noto\ Sans\ CJK\ KR\ Light\ 16
+		endif
+	endfunction
 	function! s:CJK_Font_Select()
 		if !exists("s:cjk_font_select")
 			let s:cjk_font_select = 1
@@ -158,7 +145,7 @@ endif
 	function! s:Highlight_From_File_Path(mode)
 		if has('unix')
 			let s:highlightfromfilepath = substitute(substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g'), '\ ', '\\\ ', 'g')
-		elseif has('win32') || has('win64')
+		elseif has('win64')
 			let s:highlightfromfilepath = substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g')
 		endif
 		if a:mode == 0 && filereadable(s:highlightfromfilepath)
@@ -203,20 +190,13 @@ endif
 	nmap <A-g> :call <SID>Highlight_From_File_Path_Select()<CR>
 
 " sort
-if has('gui_running')
-	if has('unix')
-		nmap <A-,> :%!perl -e 'print sort <>'<CR>:echo 'sort (perl)'<CR>
-		nmap <A-.> :%!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'<CR>:echo 'sort (python)'<CR>
-		nmap <A-/> :%!sort -k 2<CR>:echo 'sort (sort -k 2)'<CR>
-		nmap <A-<> :%!perl -e 'print reverse <>'<CR>:echo 'sort reverse (perl)'<CR>
-		nmap <A->> :%!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines(), reverse=True))'<CR>:echo 'sort reverse (python)'<CR>
-		nmap <A-?> :%!sort -k 2 -r<CR>:echo 'sort reverse (sort -k 2 -r)'<CR>
-	elseif has('win32') || has('win64')
-		nmap <A-,> :%!perl -e "print sort <>"<CR>:echo "sort (perl)"<CR>
-		nmap <A-.> :%!python -c "import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))"<CR>:echo "sort (python)"<CR>
-		nmap <A-<> :%!perl -e "print reverse <>"<CR>:echo "sort reverse (perl)"<CR>
-		nmap <A->> :%!python -c "import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines(), reverse=True))"<CR>:echo "sort reverse (python)"<CR>
-	endif
+if has('gui_running') && has('unix')
+	nmap <expr> <A-p> &diff ? ":%!perl -e 'print reverse <>'<CR>:echo 'sort reverse (perl)'<CR>"
+		\ : ":%!perl -e 'print sort <>'<CR>:echo 'sort (perl)'<CR>"
+	nmap <expr> <A-P> &diff ? ":%!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines(), reverse=True))'<CR>:echo 'sort reverse (python)'<CR>"
+		\ : ":%!python -c 'import sys ; sys.stdout.writelines(sorted(sys.stdin.readlines()))'<CR>:echo 'sort (python)'<CR>"
+	nmap <expr> <A-S> &diff ? ":%!sort -k 2 -r<CR>:echo 'sort reverse (sort -k 2 -r)'<CR>"
+		\ : ":%!sort -k 2<CR>:echo 'sort (sort -k 2)'<CR>"
 endif
 
 " loadplugins
@@ -241,10 +221,6 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		let g:signify_disable_by_default = 1
 		let g:signify_line_highlight = 1
 		let g:signify_vcs_list = [ 'git', 'hg' ]
-		nmap <expr> <A-h> &diff ? "gg]c[c" : "gg<Plug>(signify-next-hunk)<Plug>(signify-prev-hunk)"
-		nmap <expr> <A-l> &diff ? "G[c]c" : "G<Plug>(signify-prev-hunk)<Plug>(signify-next-hunk)"
-		nmap <expr> <A-j> &diff ? "]czz" : "<Plug>(signify-next-hunk)zz"
-		nmap <expr> <A-k> &diff ? "[czz" : "<Plug>(signify-prev-hunk)zz"
 	if has('gui_running')
 		" nerdtree
 			nmap <A-n> :NERDTreeToggle<CR>
@@ -255,6 +231,10 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		" vcscommand
 			nmap <A-v> :VCSDiff<CR>
 		" vim-signify
+			nmap <expr> <A-h> &diff ? "gg]c[c" : "gg<Plug>(signify-next-hunk)<Plug>(signify-prev-hunk)"
+			nmap <expr> <A-l> &diff ? "G[c]c" : "G<Plug>(signify-prev-hunk)<Plug>(signify-next-hunk)"
+			nmap <expr> <A-j> &diff ? "]czz" : "<Plug>(signify-next-hunk)zz"
+			nmap <expr> <A-k> &diff ? "[czz" : "<Plug>(signify-prev-hunk)zz"
 			nmap <expr> <A-s> &diff ? ":diffoff<CR>" : ":SignifyToggle<CR>"
 	else
 		" syntastic
@@ -263,8 +243,10 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 else
 	nmap n nzz
 	nmap N Nzz
-	nmap <A-h> gg]c[c
-	nmap <A-l> G[c]c
-	nmap <A-j> ]czz
-	nmap <A-k> [czz
+	if has('gui_running')
+		nmap <A-h> gg]c[c
+		nmap <A-l> G[c]c
+		nmap <A-j> ]czz
+		nmap <A-k> [czz
+	endif
 endif
