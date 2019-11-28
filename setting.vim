@@ -22,7 +22,8 @@ set ambiwidth=double
 set autoindent
 set autoread
 set backspace=indent,eol,start
-set diffopt=filler,horizontal
+set cryptmethod=blowfish2
+set diffopt=internal,algorithm:histogram
 set encoding=utf-8
 set fileencoding=utf-8
 set foldcolumn=1
@@ -61,11 +62,6 @@ elseif has('win64')
 		set guifont=Source_Code_Pro_Light:h13.5
 		set guifontwide=MingLiU:h17
 	endif
-endif
-if v:version >= 800
-	set cryptmethod=blowfish2
-elseif v:version >= 704 && has('patch401')
-	set cryptmethod=blowfish2
 endif
 if has('gui_running')
 	map! <A-h> <Left>
@@ -206,14 +202,10 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 	" neocomplete.vim
 		let g:neocomplete#enable_at_startup = 1
 		let g:neocomplete#enable_smart_case = 1
-	" nerdtree
-		let NERDTreeQuitOnOpen = 1
 	" syntastic
 		let g:syntastic_always_populate_loc_list = 1
 		let g:syntastic_auto_loc_list = 1
 		let g:syntastic_check_on_wq = 0
-	" vim-diff-enhanced
-		let &diffexpr = 'EnhancedDiff#Diff("git diff", "--diff-algorithm=histogram")'
 	" vim-searchindex
 		nmap n nzz<Plug>SearchIndex
 		nmap N Nzz<Plug>SearchIndex
@@ -222,8 +214,6 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		let g:signify_line_highlight = 1
 		let g:signify_vcs_list = [ 'git', 'hg' ]
 	if has('gui_running')
-		" nerdtree
-			nmap <A-n> :NERDTreeToggle<CR>
 		" syntastic
 			set statusline+=%1*%{SyntasticStatuslineFlag()}%*
 			nmap <A-c> :SyntasticCheck<CR>
