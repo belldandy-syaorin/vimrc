@@ -206,9 +206,6 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 		let g:syntastic_always_populate_loc_list = 1
 		let g:syntastic_auto_loc_list = 1
 		let g:syntastic_check_on_wq = 0
-	" vim-searchindex
-		nmap n nzz<Plug>SearchIndex
-		nmap N Nzz<Plug>SearchIndex
 	" vim-signify
 		let g:signify_disable_by_default = 1
 		let g:signify_line_highlight = 1
@@ -218,8 +215,6 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 			set statusline+=%1*%{SyntasticStatuslineFlag()}%*
 			nmap <A-c> :SyntasticCheck<CR>
 			nmap <A-r> :SyntasticReset<CR>
-		" vcscommand
-			nmap <A-v> :VCSDiff<CR>
 		" vim-signify
 			nmap <expr> <A-h> &diff ? "gg]c[c" : "gg<Plug>(signify-next-hunk)<Plug>(signify-prev-hunk)"
 			nmap <expr> <A-l> &diff ? "G[c]c" : "G<Plug>(signify-prev-hunk)<Plug>(signify-next-hunk)"
@@ -231,8 +226,6 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 			set statusline+=%{SyntasticStatuslineFlag()}
 	endif
 else
-	nmap n nzz
-	nmap N Nzz
 	if has('gui_running')
 		nmap <A-h> gg]c[c
 		nmap <A-l> G[c]c
