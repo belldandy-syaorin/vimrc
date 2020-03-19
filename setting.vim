@@ -216,6 +216,7 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 			nmap <A-c> :SyntasticCheck<CR>
 			nmap <A-r> :SyntasticReset<CR>
 		" vim-signify
+			set statusline+=%1*%{sy#repo#get_stats_decorated()}%*
 			nmap <expr> <A-h> &diff ? "gg]c[c" : "gg<Plug>(signify-next-hunk)<Plug>(signify-prev-hunk)"
 			nmap <expr> <A-l> &diff ? "G[c]c" : "G<Plug>(signify-prev-hunk)<Plug>(signify-next-hunk)"
 			nmap <expr> <A-j> &diff ? "]czz" : "<Plug>(signify-next-hunk)zz"
@@ -224,6 +225,8 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 	else
 		" syntastic
 			set statusline+=%{SyntasticStatuslineFlag()}
+		" vim-signify
+			set statusline+=%{sy#repo#get_stats_decorated()}
 	endif
 else
 	if has('gui_running')
