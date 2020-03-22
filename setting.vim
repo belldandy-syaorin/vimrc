@@ -209,7 +209,6 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 	" vim-signify
 		let g:signify_disable_by_default = 1
 		let g:signify_line_highlight = 1
-		let g:signify_vcs_list = [ 'git', 'hg' ]
 	if has('gui_running')
 		" syntastic
 			set statusline+=%1*%{SyntasticStatuslineFlag()}%*
