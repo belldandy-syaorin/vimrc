@@ -186,8 +186,10 @@ endif
 	nmap <A-g> :call <SID>Highlight_Group_Select()<CR>
 
 " mercurial
+if has('gui_running') && has('unix')
 	nmap <A-v> :!hg status "%"<CR>
 	nmap <A-V> :!hg diff "%"<CR>
+endif
 
 " sort
 if has('gui_running') && has('unix')
