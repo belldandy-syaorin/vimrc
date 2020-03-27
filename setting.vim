@@ -137,53 +137,57 @@ if has('gui_running') && has('unix')
 	call <SID>CJK_Font(0)
 endif
 
-" Highlight_From_File_Path
-	function! s:Highlight_From_File_Path(mode)
+" Highlight_Group
+	function! s:Highlight_Group(mode)
 		if has('unix')
-			let s:highlightfromfilepath = substitute(substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g'), '\ ', '\\\ ', 'g')
+			let s:highlight_group_path = substitute(substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g'), '\ ', '\\\ ', 'g')
 		elseif has('win64')
-			let s:highlightfromfilepath = substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g')
+			let s:highlight_group_path = substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g')
 		endif
-		if a:mode == 0 && filereadable(s:highlightfromfilepath)
+		if a:mode == 0 && filereadable(s:highlight_group_path)
 			syntax clear
-			echo 'Highlight From File Path = Disable'
-		elseif a:mode == 1 && filereadable(s:highlightfromfilepath)
+			echo 'Highlight Group = Disable'
+		elseif a:mode == 1 && filereadable(s:highlight_group_path)
 			syntax clear
-			execute 'source ' s:highlightfromfilepath
-			if g:highlight_file_path_group == 0
-				echo 'Highlight From File Path = Enable (group 0)'
-			elseif g:highlight_file_path_group == 1
-				echo 'Highlight From File Path = Enable (group 0+1)'
-			elseif g:highlight_file_path_group == 2
-				echo 'Highlight From File Path = Enable (group 0+2)'
+			execute 'source ' s:highlight_group_path
+			if g:highlight_group == 0
+				echo 'Highlight Group = Enable (0)'
+			elseif g:highlight_group == 1
+				echo 'Highlight Group = Enable (0+1)'
+			elseif g:highlight_group == 2
+				echo 'Highlight Group = Enable (0+2)'
 			endif
 		else
-			echo 'Highlight From File Path = n/a'
+			echo 'Highlight Group = n/a'
 		endif
 	endfunction
-	function! s:Highlight_From_File_Path_Select()
-		if !exists("s:highlight_file_path_select") && !exists("g:highlight_file_path_group")
-			let s:highlight_file_path_select = 1
-			let g:highlight_file_path_group = 0
+	function! s:Highlight_Group_Select()
+		if !exists("s:highlight_group_select") && !exists("g:highlight_group")
+			let s:highlight_group_select = 1
+			let g:highlight_group = 0
 		endif
-		if s:highlight_file_path_select == 0
-			call <SID>Highlight_From_File_Path(0)
-			let s:highlight_file_path_select = 1
-		elseif s:highlight_file_path_select == 1
-			call <SID>Highlight_From_File_Path(1)
-			let s:highlight_file_path_select = 2
-			let g:highlight_file_path_group = 1
-		elseif s:highlight_file_path_select == 2
-			call <SID>Highlight_From_File_Path(1)
-			let s:highlight_file_path_select = 3
-			let g:highlight_file_path_group = 2
-		elseif s:highlight_file_path_select == 3
-			call <SID>Highlight_From_File_Path(1)
-			let s:highlight_file_path_select = 0
-			let g:highlight_file_path_group = 0
+		if s:highlight_group_select == 0
+			call <SID>Highlight_Group(0)
+			let s:highlight_group_select = 1
+		elseif s:highlight_group_select == 1
+			call <SID>Highlight_Group(1)
+			let s:highlight_group_select = 2
+			let g:highlight_group = 1
+		elseif s:highlight_group_select == 2
+			call <SID>Highlight_Group(1)
+			let s:highlight_group_select = 3
+			let g:highlight_group = 2
+		elseif s:highlight_group_select == 3
+			call <SID>Highlight_Group(1)
+			let s:highlight_group_select = 0
+			let g:highlight_group = 0
 		endif
 	endfunction
-	nmap <A-g> :call <SID>Highlight_From_File_Path_Select()<CR>
+	nmap <A-g> :call <SID>Highlight_Group_Select()<CR>
+
+" mercurial
+	nmap <A-v> :!hg status "%"<CR>
+	nmap <A-V> :!hg diff "%"<CR>
 
 " sort
 if has('gui_running') && has('unix')
