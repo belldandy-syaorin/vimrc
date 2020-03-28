@@ -115,10 +115,9 @@ if has('gui_running') && has('unix')
 			set guifontwide=Noto\ Sans\ CJK\ KR\ Light\ 16
 		endif
 	endfunction
+	call <SID>CJK_Font(0)
+	let s:cjk_font_select = 1
 	function! s:CJK_Font_Select()
-		if !exists("s:cjk_font_select")
-			let s:cjk_font_select = 1
-		endif
 		if s:cjk_font_select == 0
 			call <SID>CJK_Font(0)
 			let s:cjk_font_select = 1
@@ -134,7 +133,6 @@ if has('gui_running') && has('unix')
 		endif
 	endfunction
 	nmap <A-f> :call <SID>CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
-	call <SID>CJK_Font(0)
 endif
 
 " Highlight_Group
@@ -161,11 +159,9 @@ endif
 			echo 'Highlight Group = n/a'
 		endif
 	endfunction
+	let s:highlight_group_select = 1
+	let g:highlight_group = 0
 	function! s:Highlight_Group_Select()
-		if !exists("s:highlight_group_select") && !exists("g:highlight_group")
-			let s:highlight_group_select = 1
-			let g:highlight_group = 0
-		endif
 		if s:highlight_group_select == 0
 			call <SID>Highlight_Group(0)
 			let s:highlight_group_select = 1
