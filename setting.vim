@@ -2,8 +2,8 @@
 set nocompatible
 
 " vim-pathogen
-if filereadable(expand('$VIMRUNTIME/autoload/pathogen.vim')) ||
-	\ filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim'))
+if filereadable(expand('$VIMRUNTIME/autoload/pathogen.vim'))
+	\ || filereadable(expand('$VIM/vimfiles/autoload/pathogen.vim'))
 	let s:use_pathogen = 1
 else
 	let s:use_pathogen = 0
@@ -138,9 +138,9 @@ endif
 " Highlight_Group
 	function! s:Highlight_Group(mode)
 		if has('unix')
-			let s:highlight_group_path = substitute(substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g'), '\ ', '\\\ ', 'g')
+			let s:highlight_group_path = expand('%:h') . "/highlight.vim"
 		elseif has('win64')
-			let s:highlight_group_path = substitute(expand('%'), expand('%:t'), 'highlight.vim', 'g')
+			let s:highlight_group_path = expand('%:h') . "\\highlight.vim"
 		endif
 		if a:mode == 0 && filereadable(s:highlight_group_path)
 			syntax clear
@@ -183,8 +183,22 @@ endif
 
 " mercurial
 if has('gui_running') && has('unix')
-	nmap <A-v> :!hg status "%"<CR>
-	nmap <A-V> :!hg diff "%"<CR>
+	function! s:Mercurial(mode)
+		if filereadable(expand('%:h') . "/.hgignore")
+			if a:mode == 0
+				:!hg status "%"
+			elseif a:mode == 1
+				:new|0read !hg diff "#"
+			elseif a:mode == 2
+				:tabnew|0read !hg diff "#"
+			endif
+		else
+			echo 'Repository = n/a'
+		endif
+	endfunction
+	nmap <A-n> :call <SID>Mercurial(1)<CR>
+	nmap <A-t> :call <SID>Mercurial(2)<CR>
+	nmap <A-v> :call <SID>Mercurial(0)<CR>
 endif
 
 " sort
