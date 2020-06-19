@@ -184,13 +184,13 @@ endif
 " mercurial
 if has('gui_running') && has('unix')
 	function! s:Mercurial(mode)
-		if filereadable(expand('%:h') . "/.hgignore")
+		if isdirectory(expand('%:h') . "/.hg")
 			if a:mode == 0
 				:!hg status "%"
 			elseif a:mode == 1
-				:new|0read !hg diff "#"
+				:new|resize|diffthis|0read !hg diff "#"
 			elseif a:mode == 2
-				:tabnew|0read !hg diff "#"
+				:tabnew|diffthis|0read !hg diff "#"
 			endif
 		else
 			echo 'Repository = n/a'
