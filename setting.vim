@@ -215,9 +215,6 @@ endif
 if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 	" ctrlp.vim
 		let g:ctrlp_types = ['buf', 'mru', 'fil']
-	" neocomplete.vim
-		let g:neocomplete#enable_at_startup = 1
-		let g:neocomplete#enable_smart_case = 1
 	" syntastic
 		let g:syntastic_always_populate_loc_list = 1
 		let g:syntastic_auto_loc_list = 1
