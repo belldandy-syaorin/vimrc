@@ -73,15 +73,18 @@ if has('gui_running')
 	nmap <A-m> <C-w>_
 	nmap <A-w> :set wrap!<CR>
 	highlight Normal guibg=black guifg=white
-	highlight User1 guibg=white guifg=red
-	highlight User2 guibg=white guifg=green
-	highlight User3 guibg=white guifg=blue
+	highlight User1 guibg=white guifg=darkred
+	highlight User2 guibg=white guifg=darkgreen
+	highlight User3 guibg=white guifg=darkblue
+	highlight User4 guibg=white guifg=darkcyan
+	highlight User5 guibg=white guifg=darkmagenta
+	highlight User6 guibg=white guifg=darkyellow
 	set guioptions-=e
 	set guioptions-=m
 	set guioptions-=T
-	set statusline=[%1*%t%*@%1*%{bufnr('%')}%*]
-	set statusline+=[%2*%{&fileencoding}%*(%2*%{&bomb}%*)%2*%{&fileformat}%*]
-	set statusline+=[%3*%M%R%Y%*]
+	set statusline=[%4*%t%*@%4*%{bufnr('%')}%*]
+	set statusline+=[%5*%{&fileencoding}%*(%5*%{&bomb}%*)%5*%{&fileformat}%*]
+	set statusline+=[%6*%M%R%Y%*]
 	set statusline+=%=
 	set statusline+=[%1*%{mode()}%*]
 	set statusline+=[%1*%{len(filter(range(1,bufnr('$')),'buflisted(v:val)'))}%*]
