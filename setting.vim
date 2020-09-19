@@ -157,6 +157,8 @@ endif
 				echo 'Highlight Group = Enable (0+1)'
 			elseif g:highlight_group == 2
 				echo 'Highlight Group = Enable (0+2)'
+			elseif g:highlight_group == 3
+				echo 'Highlight Group = Enable (0+3)'
 			endif
 		else
 			echo 'Highlight Group = n/a'
@@ -177,6 +179,10 @@ endif
 			let s:highlight_group_select = 3
 			let g:highlight_group = 2
 		elseif s:highlight_group_select == 3
+			call <SID>Highlight_Group(1)
+			let s:highlight_group_select = 4
+			let g:highlight_group = 3
+		elseif s:highlight_group_select == 4
 			call <SID>Highlight_Group(1)
 			let s:highlight_group_select = 0
 			let g:highlight_group = 0
@@ -232,10 +238,10 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 			nmap <A-r> :SyntasticReset<CR>
 		" vim-signify
 			set statusline+=%1*%{sy#repo#get_stats_decorated()}%*
-			nmap <expr> <A-h> &diff ? "gg]c[c" : "gg<Plug>(signify-next-hunk)<Plug>(signify-prev-hunk)"
-			nmap <expr> <A-l> &diff ? "G[c]c" : "G<Plug>(signify-prev-hunk)<Plug>(signify-next-hunk)"
-			nmap <expr> <A-j> &diff ? "]czz" : "<Plug>(signify-next-hunk)zz"
-			nmap <expr> <A-k> &diff ? "[czz" : "<Plug>(signify-prev-hunk)zz"
+			nmap <expr> <A-h> &diff ? "gg]c" : "gg<Plug>(signify-next-hunk)"
+			nmap <expr> <A-l> &diff ? "G[c" : "G<Plug>(signify-prev-hunk)"
+			nmap <expr> <A-j> &diff ? "]c" : "<Plug>(signify-next-hunk)"
+			nmap <expr> <A-k> &diff ? "[c" : "<Plug>(signify-prev-hunk)"
 			nmap <expr> <A-s> &diff ? ":diffoff<CR>" : ":SignifyToggle<CR>"
 	else
 		" syntastic
@@ -247,7 +253,7 @@ else
 	if has('gui_running')
 		nmap <A-h> gg]c[c
 		nmap <A-l> G[c]c
-		nmap <A-j> ]czz
-		nmap <A-k> [czz
+		nmap <A-j> ]c
+		nmap <A-k> [c
 	endif
 endif
