@@ -208,6 +208,9 @@ if has('gui_running') && has('unix')
 	nmap <A-n> :call <SID>Mercurial(1)<CR>
 	nmap <A-t> :call <SID>Mercurial(2)<CR>
 	nmap <A-v> :call <SID>Mercurial(0)<CR>
+	nmap <A-N> :new<CR>:resize<CR>:diffthis<CR>:0read !hg diff "#"<CR>
+	nmap <A-T> :tabnew<CR>:diffthis<CR>:0read !hg diff "#"<CR>
+	nmap <A-V> :!hg status "%"<CR>
 endif
 
 " sort
@@ -238,8 +241,8 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 			nmap <A-r> :SyntasticReset<CR>
 		" vim-signify
 			set statusline+=%1*%{sy#repo#get_stats_decorated()}%*
-			nmap <expr> <A-h> &diff ? "gg]c" : "gg<Plug>(signify-next-hunk)"
-			nmap <expr> <A-l> &diff ? "G[c" : "G<Plug>(signify-prev-hunk)"
+			nmap <expr> <A-h> &diff ? "gg]c[c" : "gg<Plug>(signify-next-hunk)<Plug>(signify-prev-hunk)"
+			nmap <expr> <A-l> &diff ? "G[c]c" : "G<Plug>(signify-prev-hunk)<Plug>(signify-next-hunk)"
 			nmap <expr> <A-j> &diff ? "]c" : "<Plug>(signify-next-hunk)"
 			nmap <expr> <A-k> &diff ? "[c" : "<Plug>(signify-prev-hunk)"
 			nmap <expr> <A-s> &diff ? ":diffoff<CR>" : ":SignifyToggle<CR>"
