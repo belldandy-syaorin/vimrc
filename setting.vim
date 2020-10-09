@@ -138,6 +138,63 @@ if has('gui_running') && has('unix')
 	nmap <A-f> :call <SID>CJK_Font_Select()<CR>:echo 'guifontwide ='&guifontwide<CR>
 endif
 
+" Diff_Pos
+if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
+	function! s:Diff_Pos(mode)
+		while a:mode == 0
+			let s:startpos = line('.')
+			:execute "normal \<Plug>(signify-prev-hunk)"
+			let s:endpos = line('.')
+			if s:startpos == s:endpos
+				:execute "normal \<Plug>(signify-next-hunk)"
+				:execute "normal \<Plug>(signify-prev-hunk)"
+				echo 'Diff Position (vim-signify) = First'
+				break
+			end
+		endwhile
+		while a:mode == 1
+			let s:startpos = line('.')
+			:execute "normal \<Plug>(signify-next-hunk)"
+			let s:endpos = line('.')
+			if s:startpos == s:endpos
+				:execute "normal \<Plug>(signify-prev-hunk)"
+				:execute "normal \<Plug>(signify-next-hunk)"
+				echo 'Diff Position (vim-signify) = Last'
+				break
+			end
+		endwhile
+	endfunction
+else
+	function! s:Diff_Pos(mode)
+		while a:mode == 0
+			let s:startpos = line('.')
+			normal! [c
+			let s:endpos = line('.')
+			if s:startpos == s:endpos
+				normal! ]c
+				normal! [c
+				echo 'Diff Position (vimdiff) = First'
+				break
+			end
+		endwhile
+		while a:mode == 1
+			let s:startpos = line('.')
+			normal! ]c
+			let s:endpos = line('.')
+			if s:startpos == s:endpos
+				normal! [c
+				normal! ]c
+				echo 'Diff Position (vimdiff) = Last'
+				break
+			end
+		endwhile
+	endfunction
+endif
+if has('gui_running')
+	nmap <A-h> :call <SID>Diff_Pos(0)<CR>
+	nmap <A-l> :call <SID>Diff_Pos(1)<CR>
+endif
+
 " Highlight_Group
 	function! s:Highlight_Group(mode)
 		if has('unix')
@@ -241,8 +298,6 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 			nmap <A-r> :SyntasticReset<CR>
 		" vim-signify
 			set statusline+=%1*%{sy#repo#get_stats_decorated()}%*
-			nmap <expr> <A-h> &diff ? "gg]c[c" : "gg<Plug>(signify-next-hunk)<Plug>(signify-prev-hunk)"
-			nmap <expr> <A-l> &diff ? "G[c]c" : "G<Plug>(signify-prev-hunk)<Plug>(signify-next-hunk)"
 			nmap <expr> <A-j> &diff ? "]c" : "<Plug>(signify-next-hunk)"
 			nmap <expr> <A-k> &diff ? "[c" : "<Plug>(signify-prev-hunk)"
 			nmap <expr> <A-s> &diff ? ":diffoff<CR>" : ":SignifyToggle<CR>"
@@ -254,8 +309,6 @@ if (&loadplugins == 1) && s:use_pathogen == 1 && s:use_root == 0
 	endif
 else
 	if has('gui_running')
-		nmap <A-h> gg]c[c
-		nmap <A-l> G[c]c
 		nmap <A-j> ]c
 		nmap <A-k> [c
 	endif
