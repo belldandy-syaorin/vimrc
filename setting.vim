@@ -247,7 +247,7 @@ endif
 	endfunction
 	nmap <A-g> :call <SID>Highlight_Group_Select()<CR>
 
-" mercurial
+" Mercurial
 if has('gui_running') && has('unix')
 	function! s:Mercurial(mode)
 		if isdirectory(expand('%:h') . "/.hg")
@@ -270,7 +270,7 @@ if has('gui_running') && has('unix')
 	nmap <A-V> :!hg status "%"<CR>
 endif
 
-" sort
+" linux
 if has('gui_running') && has('unix')
 	nmap <expr> <A-p> &diff ? ":%!perl -e 'print reverse <>'<CR>:echo 'sort reverse (perl)'<CR>"
 		\ : ":%!perl -e 'print sort <>'<CR>:echo 'sort (perl)'<CR>"
